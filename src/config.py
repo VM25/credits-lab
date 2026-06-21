@@ -48,3 +48,6 @@ KAGGLE_CREDIT = "wordsforthewise/lending-club"
 KAGGLE_FRAUD = "mlg-ulb/creditcardfraud"
 
 ROUND_DP = 6
+
+# Display-sample size for large row-level JSONs
+UI_SAMPLE_ROWS = 1500

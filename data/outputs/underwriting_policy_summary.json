@@ -1,0 +1,154 @@
+{
+  "approval_mix": {
+    "approve": 9,
+    "decline": 57652,
+    "review": 12338
+  },
+  "approval_rate": 0.000129,
+  "average_pd_by_decision": {
+    "approve": 0.003535,
+    "decline": 0.292068,
+    "review": 0.092662
+  },
+  "champion_calibration": {
+    "brier_after": 0.184648,
+    "brier_before": 0.191188
+  },
+  "decline_rate": 0.823612,
+  "default_rate_by_decision": {
+    "approve": 0.111111,
+    "decline": 0.244484,
+    "review": 0.06403
+  },
+  "expected_loss_by_decision": {
+    "approve": 33.40924,
+    "decline": 190968456.278102,
+    "review": 7890406.392945
+  },
+  "expected_loss_by_risk_grade": {
+    "A": 0.0,
+    "B": 33.40924,
+    "C": 3318917.591883,
+    "D": 17785081.392981,
+    "E": 177754863.686183
+  },
+  "pd_distribution": [
+    {
+      "bin_left": 0.0,
+      "bin_right": 0.05,
+      "count": 9
+    },
+    {
+      "bin_left": 0.05,
+      "bin_right": 0.1,
+      "count": 6112
+    },
+    {
+      "bin_left": 0.1,
+      "bin_right": 0.15,
+      "count": 10738
+    },
+    {
+      "bin_left": 0.15,
+      "bin_right": 0.2,
+      "count": 6823
+    },
+    {
+      "bin_left": 0.2,
+      "bin_right": 0.25,
+      "count": 9890
+    },
+    {
+      "bin_left": 0.25,
+      "bin_right": 0.3,
+      "count": 9972
+    },
+    {
+      "bin_left": 0.3,
+      "bin_right": 0.35,
+      "count": 8539
+    },
+    {
+      "bin_left": 0.35,
+      "bin_right": 0.4,
+      "count": 7640
+    },
+    {
+      "bin_left": 0.4,
+      "bin_right": 0.45,
+      "count": 5774
+    },
+    {
+      "bin_left": 0.45,
+      "bin_right": 0.5,
+      "count": 2724
+    },
+    {
+      "bin_left": 0.5,
+      "bin_right": 0.55,
+      "count": 229
+    },
+    {
+      "bin_left": 0.55,
+      "bin_right": 0.6,
+      "count": 1467
+    },
+    {
+      "bin_left": 0.6,
+      "bin_right": 0.65,
+      "count": 82
+    },
+    {
+      "bin_left": 0.65,
+      "bin_right": 0.7,
+      "count": 0
+    },
+    {
+      "bin_left": 0.7,
+      "bin_right": 0.75,
+      "count": 0
+    },
+    {
+      "bin_left": 0.75,
+      "bin_right": 0.8,
+      "count": 0
+    },
+    {
+      "bin_left": 0.8,
+      "bin_right": 0.85,
+      "count": 0
+    },
+    {
+      "bin_left": 0.85,
+      "bin_right": 0.9,
+      "count": 0
+    },
+    {
+      "bin_left": 0.9,
+      "bin_right": 0.95,
+      "count": 0
+    },
+    {
+      "bin_left": 0.95,
+      "bin_right": 1.0,
+      "count": 0
+    }
+  ],
+  "review_rate": 0.17626,
+  "risk_grade_distribution": {
+    "A": 8,
+    "B": 1,
+    "C": 6112,
+    "D": 17561,
+    "E": 46317
+  },
+  "top_decline_reasons": {
+    "high_debt_to_income": 1799,
+    "high_predicted_default_risk": 57652,
+    "high_revolving_utilization": 8803,
+    "large_loan_amount": 14336,
+    "low_income_to_loan_coverage": 79,
+    "prior_delinquency": 11799,
+    "weak_credit_grade": 6924
+  }
+}
