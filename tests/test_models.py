@@ -10,6 +10,11 @@ def test_metrics_ranges():
     conf = metrics.confusion_at(y, s, 0.5)
     assert set(conf) == {"tp","fp","tn","fn"} and sum(conf.values()) == len(y)
 
+def test_ks_correctness():
+    # perfectly separable -> KS == 1; well-separated sample -> high
+    assert metrics.ks([0,0,1,1], [0.1,0.2,0.8,0.9]) == 1.0
+    assert metrics.ks([0,0,1,1,0,1], [.1,.2,.8,.7,.3,.9]) > 0.7
+
 def test_psi_status_bands():
     assert metrics.psi_status(0.05) == "stable"
     assert metrics.psi_status(0.15) == "monitor"
@@ -20,7 +25,11 @@ def test_calibration_outputs_probabilities():
     cal = calibration.fit(s, y); p = cal.transform(s)
     assert ((p>=0)&(p<=1)).all()
     assert 0 <= cal.brier_after <= 1 and 0 <= cal.brier_before <= 1
+    # isotonic calibration must not worsen Brier on its own fit data
+    assert cal.brier_after <= cal.brier_before + 1e-9
     assert len(cal.curve) > 0
+    for pt in cal.curve:
+        assert set(pt) >= {"mean_predicted", "observed", "count"}
 
 def test_models_fit_predict():
     rng = np.random.RandomState(0)
