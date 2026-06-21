@@ -36,6 +36,7 @@ MANUAL_REVIEW_CAPACITY = 250
 # Data sampling / sources
 CREDIT_SAMPLE_ROWS = 70000
 PAYMENTS_SAMPLE_ROWS = 80000
+STABLECOIN_ROWS = 2500
 FRED_SERIES = {
     "unemployment_rate": "UNRATE",
     "policy_rate": "FEDFUNDS",
