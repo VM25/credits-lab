@@ -4,6 +4,7 @@ All floats are rounded to config.ROUND_DP decimal places.
 JSON output uses sorted keys and 2-space indent.
 """
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -19,12 +20,15 @@ def _round_obj(obj):
     if isinstance(obj, np.integer):
         return int(obj)
     if isinstance(obj, (float, np.floating)):
-        return round(float(obj), config.ROUND_DP)
+        v = float(obj)
+        if not math.isfinite(v):
+            return None
+        return round(v, config.ROUND_DP)
     if isinstance(obj, np.ndarray):
         return [_round_obj(v) for v in obj.tolist()]
     if isinstance(obj, dict):
         return {k: _round_obj(v) for k, v in obj.items()}
-    if isinstance(obj, list):
+    if isinstance(obj, (list, tuple)):
         return [_round_obj(v) for v in obj]
     return obj
 
