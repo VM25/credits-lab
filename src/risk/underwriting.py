@@ -22,6 +22,7 @@ import pandas as pd
 from src import config
 from src.data.features import underwriting_features
 from src.models import calibration, gbm, scorecard
+from src.models.metrics import brier as _brier, roc_auc as _roc_auc
 from src.reporting.writers import write_csv, write_json
 
 # ---------------------------------------------------------------------------
@@ -139,15 +140,17 @@ _REASON_SEVERITY_ORDER = [
     "large_loan_amount",
 ]
 
-# Loan-amount top-quartile threshold; set at build time from train data.
-_LOAN_AMOUNT_Q3: float = 25000.0  # reasonable fallback; overridden by build()
-
-
-def reason_codes(row) -> list[str]:
+def reason_codes(row, large_loan_threshold: float = 25000.0) -> list[str]:
     """Return the top 1–3 triggered reason codes for an applicant row.
 
     Codes are ordered by severity (most severe first). All codes are keys
     of ALLOWED_REASONS — never opaque 'model says risky' phrasing.
+
+    Parameters
+    ----------
+    row : dict-like applicant row (must support .get())
+    large_loan_threshold : loan_amount Q3 from the accepted-book train split.
+        Defaults to 25000.0 as a sensible standalone fallback.
 
     Triggers
     --------
@@ -156,7 +159,7 @@ def reason_codes(row) -> list[str]:
     high_revolving_utilization   : revolving_utilization > 80
     prior_delinquency            : prior_delinquency_flag == 1
     weak_credit_grade            : credit_grade in {E,F,G} or credit_grade_numeric >= 5
-    large_loan_amount            : loan_amount >= _LOAN_AMOUNT_Q3 (top quartile)
+    large_loan_amount            : loan_amount >= large_loan_threshold (top quartile)
     high_predicted_default_risk  : PD >= config.PD_DECLINE
     """
     triggered: list[str] = []
@@ -182,7 +185,7 @@ def reason_codes(row) -> list[str]:
         triggered.append("high_revolving_utilization")
     if income_to_loan < 1.0:
         triggered.append("low_income_to_loan_coverage")
-    if loan_amount >= _LOAN_AMOUNT_Q3:
+    if loan_amount >= large_loan_threshold:
         triggered.append("large_loan_amount")
 
     # Deduplicate while preserving severity order.
@@ -219,8 +222,6 @@ def build() -> dict:
     -------
     dict with key summary stats.
     """
-    global _LOAN_AMOUNT_Q3
-
     # ------------------------------------------------------------------
     # 1. Load dataset and split
     # ------------------------------------------------------------------
@@ -244,13 +245,15 @@ def build() -> dict:
         test[col] = test[col].fillna(med)
         df[col] = df[col].fillna(med)
 
-    # Set loan-amount Q3 threshold from train for reason codes
-    _LOAN_AMOUNT_Q3 = float(train["loan_amount"].quantile(0.75))
+    # Loan-amount Q3 threshold from train — passed explicitly to reason_codes
+    loan_amount_q3 = float(train["loan_amount"].quantile(0.75))
 
     X_train = train[feat_names].values
     y_train = train["default_flag"].values
     X_val = val[feat_names].values
     y_val = val["default_flag"].values
+    X_test = test[feat_names].values
+    y_test = test["default_flag"].values
     X_all = df[feat_names].values
 
     # ------------------------------------------------------------------
@@ -260,17 +263,22 @@ def build() -> dict:
     challenger = gbm.fit(X_train, y_train, feature_names=feat_names)
 
     # ------------------------------------------------------------------
-    # 4. Calibrate champion on VAL; use calibrated PD for decisions
+    # 4. Calibrate champion AND challenger on VAL;
+    #    champion calibrated PD drives all decisions (unchanged).
     # ------------------------------------------------------------------
-    val_raw_scores = champion.predict_proba(X_val)
-    calibrator = calibration.fit(val_raw_scores, y_val)
+    val_raw_scores_champ = champion.predict_proba(X_val)
+    calibrator = calibration.fit(val_raw_scores_champ, y_val)
 
-    # Calibrated PD for all accepted applicants
+    val_raw_scores_chall = challenger.predict_proba(X_val)
+    challenger_calibrator = calibration.fit(val_raw_scores_chall, y_val)
+
+    # Calibrated PD for all rows (champion drives decisions)
     all_raw_scores = champion.predict_proba(X_all)
     all_pd = calibrator.transform(all_raw_scores)  # clipped [0,1]
 
-    # Challenger PD (kept for validation; does not drive decisions)
-    _ = challenger.predict_proba(X_all)
+    # Champion and challenger calibrated PD on the held-out TEST split
+    test_champ_pd = calibrator.transform(champion.predict_proba(X_test))
+    test_chall_pd = challenger_calibrator.transform(challenger.predict_proba(X_test))
 
     # ------------------------------------------------------------------
     # 5. Per-row computation
@@ -293,7 +301,7 @@ def build() -> dict:
         # recommended_limit also needs PD in the row dict
         limit = recommended_limit(row_dict)
 
-        codes = reason_codes(row_dict)
+        codes = reason_codes(row_dict, large_loan_threshold=loan_amount_q3)
         # Pad to 3 with empty strings
         while len(codes) < 3:
             codes.append("")
@@ -452,6 +460,39 @@ def build() -> dict:
         "brier_after": float(calibrator.brier_after),
     }
 
+    # ------------------------------------------------------------------
+    # Champion vs Challenger comparison on held-out TEST split (doc 03 §12)
+    # ------------------------------------------------------------------
+    # PD distributions on test (20-bin histogram, range [0, 1])
+    def _pd_hist(pd_arr: np.ndarray) -> list[dict]:
+        counts, edges = np.histogram(pd_arr, bins=20, range=(0.0, 1.0))
+        return [
+            {"bin_left": float(edges[i]), "bin_right": float(edges[i + 1]),
+             "count": int(counts[i])}
+            for i in range(len(counts))
+        ]
+
+    champ_roc = _roc_auc(y_test, test_champ_pd)
+    champ_brier = _brier(y_test, test_champ_pd)
+    chall_roc = _roc_auc(y_test, test_chall_pd)
+    chall_brier = _brier(y_test, test_chall_pd)
+
+    pd_corr = float(np.corrcoef(test_champ_pd, test_chall_pd)[0, 1])
+
+    champion_vs_challenger = {
+        "champion": {
+            "roc_auc": float(champ_roc),
+            "brier": float(champ_brier),
+            "pd_distribution": _pd_hist(test_champ_pd),
+        },
+        "challenger": {
+            "roc_auc": float(chall_roc),
+            "brier": float(chall_brier),
+            "pd_distribution": _pd_hist(test_chall_pd),
+        },
+        "pd_correlation": pd_corr,
+    }
+
     policy_summary = {
         "approval_rate": approval_rate,
         "review_rate": review_rate,
@@ -465,6 +506,7 @@ def build() -> dict:
         "expected_loss_by_risk_grade": expected_loss_by_risk_grade,
         "top_decline_reasons": top_decline_reasons,
         "champion_calibration": champion_calibration,
+        "champion_vs_challenger": champion_vs_challenger,
     }
 
     write_json(config.OUTPUTS / "underwriting_policy_summary.json", policy_summary)

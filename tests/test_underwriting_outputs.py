@@ -17,6 +17,8 @@ def test_outputs_schema_and_ranges():
     for k in ["approval_rate", "review_rate", "decline_rate", "default_rate_by_decision",
               "expected_loss_by_decision"]:
         assert k in summ
+    drd = summ["default_rate_by_decision"]
+    assert drd["approve"] < drd["review"] < drd["decline"]
     dj = json.load(open(config.OUTPUTS / "underwriting_decisions.json"))
     assert dj["is_sample"] is True and dj["sample_size"] == len(dj["rows"]) and \
         dj["row_count_total"] >= dj["sample_size"]
