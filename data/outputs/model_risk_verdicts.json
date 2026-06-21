@@ -1,0 +1,59 @@
+{
+  "verdicts": [
+    {
+      "model_name": "champion_logistic_scorecard",
+      "model_type": "logistic regression scorecard",
+      "primary_metric": 0.726254,
+      "calibration_status": "Pass",
+      "stability_status": "Pass",
+      "segment_status": "Pass",
+      "explainability_status": "Pass: coefficient table and reason codes exported",
+      "validation_verdict": "Pass",
+      "verdict_reason": "champion_logistic_scorecard has acceptable metric evidence, calibration, stability, and explainability for this synthetic decision workflow."
+    },
+    {
+      "model_name": "challenger_gradient_boosting",
+      "model_type": "gradient boosting model",
+      "primary_metric": 0.643047,
+      "calibration_status": "Pass",
+      "stability_status": "Pass",
+      "segment_status": "Pass",
+      "explainability_status": "Monitor: feature importance is less transparent than scorecard",
+      "validation_verdict": "Monitor",
+      "verdict_reason": "Challenger is retained as benchmark because explainability is weaker than the champion scorecard."
+    },
+    {
+      "model_name": "fraud_supervised_logistic",
+      "model_type": "logistic regression fraud model",
+      "primary_metric": 0.045359,
+      "calibration_status": "Pass: fraud score is calibrated with validation bins",
+      "stability_status": "Pass",
+      "segment_status": "Monitor: PR-AUC is weak for an imbalanced target",
+      "explainability_status": "Pass: rules and coefficient drivers exported",
+      "validation_verdict": "Monitor",
+      "verdict_reason": "Fraud model requires monitoring because imbalanced-target PR-AUC is weak."
+    },
+    {
+      "model_name": "fraud_anomaly_rules",
+      "model_type": "robust z-score anomaly model",
+      "primary_metric": 0.170455,
+      "calibration_status": "Pass: anomaly score is a normalized risk score, not PD",
+      "stability_status": "Pass",
+      "segment_status": "Monitor: weak anomaly capture in top-score band",
+      "explainability_status": "Pass: rule triggers exported",
+      "validation_verdict": "Monitor",
+      "verdict_reason": "Fraud anomaly score requires monitoring because top-score capture is below 20%."
+    },
+    {
+      "model_name": "stablecoin_rule_risk_score",
+      "model_type": "rule-based payments risk score",
+      "primary_metric": 0.408511,
+      "calibration_status": "Pass: stablecoin score is not represented as calibrated PD",
+      "stability_status": "Pass",
+      "segment_status": "Pass",
+      "explainability_status": "Pass: AML-style risk indicator drivers exported",
+      "validation_verdict": "Monitor",
+      "verdict_reason": "Stablecoin score remains Monitor because labels are synthetic and the module is a secondary payments-risk proxy."
+    }
+  ]
+}

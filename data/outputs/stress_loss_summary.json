@@ -1,0 +1,141 @@
+{
+  "scenarios": [
+    {
+      "scenario": "Base",
+      "PD_multiplier": 1.0,
+      "LGD_multiplier": 1.0,
+      "fraud_loss_multiplier": 1.0,
+      "stablecoin_risk_multiplier": 1.0,
+      "expected_credit_loss": 801536.4218783925,
+      "expected_fraud_loss": 10253.047969233092,
+      "stablecoin_risk_exposure": 1367500.9159290818,
+      "total_expected_loss": 2179290.3857767074
+    },
+    {
+      "scenario": "Moderate Stress",
+      "PD_multiplier": 1.25,
+      "LGD_multiplier": 1.1,
+      "fraud_loss_multiplier": 1.2,
+      "stablecoin_risk_multiplier": 1.1,
+      "expected_credit_loss": 1102112.5800827898,
+      "expected_fraud_loss": 12303.65756307971,
+      "stablecoin_risk_exposure": 1504251.0075219902,
+      "total_expected_loss": 2618667.24516786
+    },
+    {
+      "scenario": "Severe Stress",
+      "PD_multiplier": 1.6,
+      "LGD_multiplier": 1.25,
+      "fraud_loss_multiplier": 1.5,
+      "stablecoin_risk_multiplier": 1.25,
+      "expected_credit_loss": 1603072.843756785,
+      "expected_fraud_loss": 15379.571953849638,
+      "stablecoin_risk_exposure": 1709376.1449113523,
+      "total_expected_loss": 3327828.560621987
+    }
+  ],
+  "assumptions": {
+    "PD_cap": 1.0,
+    "stablecoin_risk_multiplier_note": "Stablecoin stress is a labeled proxy sensitivity, not realized AML loss.",
+    "macro_inputs_source": "data/processed/macro_stress_inputs.csv",
+    "macro_limitation": "Macro variables support stress overlays only and are not modeled as individual default causes."
+  },
+  "macro_context": [
+    {
+      "date": "2025-01-01",
+      "unemployment_rate": 0.03,
+      "policy_rate": 0.0408,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0351,
+      "credit_card_chargeoff_rate": 0.0385
+    },
+    {
+      "date": "2025-02-01",
+      "unemployment_rate": 0.03,
+      "policy_rate": 0.0399,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0349,
+      "credit_card_chargeoff_rate": 0.0369
+    },
+    {
+      "date": "2025-03-01",
+      "unemployment_rate": 0.03,
+      "policy_rate": 0.0402,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0372,
+      "credit_card_chargeoff_rate": 0.0341
+    },
+    {
+      "date": "2025-04-01",
+      "unemployment_rate": 0.03,
+      "policy_rate": 0.0402,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0375,
+      "credit_card_chargeoff_rate": 0.036
+    },
+    {
+      "date": "2025-05-01",
+      "unemployment_rate": 0.03,
+      "policy_rate": 0.0411,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0377,
+      "credit_card_chargeoff_rate": 0.0348
+    },
+    {
+      "date": "2025-06-01",
+      "unemployment_rate": 0.03,
+      "policy_rate": 0.0438,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0334,
+      "credit_card_chargeoff_rate": 0.0339
+    },
+    {
+      "date": "2025-07-01",
+      "unemployment_rate": 0.03,
+      "policy_rate": 0.043,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0383,
+      "credit_card_chargeoff_rate": 0.0338
+    },
+    {
+      "date": "2025-08-01",
+      "unemployment_rate": 0.0328,
+      "policy_rate": 0.0429,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0369,
+      "credit_card_chargeoff_rate": 0.035
+    },
+    {
+      "date": "2025-09-01",
+      "unemployment_rate": 0.0314,
+      "policy_rate": 0.0424,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0421,
+      "credit_card_chargeoff_rate": 0.0356
+    },
+    {
+      "date": "2025-10-01",
+      "unemployment_rate": 0.0339,
+      "policy_rate": 0.0442,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0438,
+      "credit_card_chargeoff_rate": 0.0399
+    },
+    {
+      "date": "2025-11-01",
+      "unemployment_rate": 0.0372,
+      "policy_rate": 0.0445,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0464,
+      "credit_card_chargeoff_rate": 0.0374
+    },
+    {
+      "date": "2025-12-01",
+      "unemployment_rate": 0.035,
+      "policy_rate": 0.0466,
+      "inflation_rate": 0.015,
+      "consumer_credit_delinquency_rate": 0.0377,
+      "credit_card_chargeoff_rate": 0.034
+    }
+  ]
+}

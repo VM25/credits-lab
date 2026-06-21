@@ -1,0 +1,5 @@
+model_name,model_type,validation_view,segment,segment_value,segment_count,event_rate,average_score,PR_AUC,precision,recall,false_positive_rate,false_negative_rate,manual_review_volume,expected_fraud_loss_avoided,status
+fraud_supervised_logistic,logistic regression,overall,all,all,1080,0.012962962962962963,0.37323423719119375,0.04535928725105153,0.040697674418604654,0.5,0.15478424015009382,0.5,140,7767.869198315022,Monitor
+fraud_supervised_logistic,logistic regression,segment,merchant_risk_band,high,1293,0.020108275328692964,0.5264021289493197,,,,,,46,2751.665250573254,Pass
+fraud_supervised_logistic,logistic regression,segment,merchant_risk_band,low,3585,0.005578800557880056,0.23194980446517408,,,,,,23,1253.901641139365,Pass
+fraud_supervised_logistic,logistic regression,segment,merchant_risk_band,medium,2322,0.01808785529715762,0.4680290490587408,,,,,,71,3762.302306602404,Pass

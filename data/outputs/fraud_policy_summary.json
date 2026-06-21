@@ -1,0 +1,284 @@
+{
+  "payment_action_mix": [
+    {
+      "payment_action": "Approve",
+      "transaction_count": 3559,
+      "average_fraud_score": 0.185912,
+      "expected_fraud_loss": 431.541525,
+      "observed_fraud_rate": 0.004215,
+      "transaction_share": 0.494306
+    },
+    {
+      "payment_action": "Block",
+      "transaction_count": 23,
+      "average_fraud_score": 0.822378,
+      "expected_fraud_loss": 559.332528,
+      "observed_fraud_rate": 0.130435,
+      "transaction_share": 0.003194
+    },
+    {
+      "payment_action": "Manual review",
+      "transaction_count": 1044,
+      "average_fraud_score": 0.672932,
+      "expected_fraud_loss": 7208.53667,
+      "observed_fraud_rate": 0.043103,
+      "transaction_share": 0.145
+    },
+    {
+      "payment_action": "Step-up verification",
+      "transaction_count": 2574,
+      "average_fraud_score": 0.472349,
+      "expected_fraud_loss": 2053.637246,
+      "observed_fraud_rate": 0.009713,
+      "transaction_share": 0.3575
+    }
+  ],
+  "fraud_score_distribution": [
+    {
+      "label": "0-0.20",
+      "count": 1930
+    },
+    {
+      "label": "0.20-0.35",
+      "count": 1629
+    },
+    {
+      "label": "0.35-0.60",
+      "count": 2574
+    },
+    {
+      "label": "0.60-0.80",
+      "count": 1044
+    },
+    {
+      "label": "0.80-1.00",
+      "count": 23
+    }
+  ],
+  "expected_fraud_loss_by_action": [
+    {
+      "payment_action": "Approve",
+      "expected_fraud_loss": 431.541525,
+      "transaction_count": 3559
+    },
+    {
+      "payment_action": "Block",
+      "expected_fraud_loss": 559.332528,
+      "transaction_count": 23
+    },
+    {
+      "payment_action": "Manual review",
+      "expected_fraud_loss": 7208.53667,
+      "transaction_count": 1044
+    },
+    {
+      "payment_action": "Step-up verification",
+      "expected_fraud_loss": 2053.637246,
+      "transaction_count": 2574
+    }
+  ],
+  "manual_review_queue_size": 140,
+  "manual_review_capacity": 140,
+  "top_fraud_drivers": [
+    {
+      "reason_code": "high velocity",
+      "count": 7088
+    },
+    {
+      "reason_code": "high-risk merchant",
+      "count": 6989
+    },
+    {
+      "reason_code": "high amount",
+      "count": 3081
+    },
+    {
+      "reason_code": "unusual account amount",
+      "count": 2918
+    },
+    {
+      "reason_code": "new device",
+      "count": 696
+    },
+    {
+      "reason_code": "new location",
+      "count": 674
+    },
+    {
+      "reason_code": "short account age",
+      "count": 154
+    }
+  ],
+  "threshold_tradeoff": [
+    {
+      "threshold": 0.1,
+      "fraud_captured": 0.9285714285714286,
+      "false_positives": 942,
+      "false_positive_rate": 0.8836772983114447,
+      "false_negatives": 1,
+      "manual_review_volume": 955,
+      "expected_fraud_loss": 3.865871700867832
+    },
+    {
+      "threshold": 0.15,
+      "fraud_captured": 0.9285714285714286,
+      "false_positives": 871,
+      "false_positive_rate": 0.8170731707317073,
+      "false_negatives": 1,
+      "manual_review_volume": 884,
+      "expected_fraud_loss": 8.590651774128865
+    },
+    {
+      "threshold": 0.2,
+      "fraud_captured": 0.8571428571428571,
+      "false_positives": 801,
+      "false_positive_rate": 0.7514071294559099,
+      "false_negatives": 2,
+      "manual_review_volume": 813,
+      "expected_fraud_loss": 14.636983871814685
+    },
+    {
+      "threshold": 0.25,
+      "fraud_captured": 0.8571428571428571,
+      "false_positives": 729,
+      "false_positive_rate": 0.6838649155722326,
+      "false_negatives": 2,
+      "manual_review_volume": 741,
+      "expected_fraud_loss": 24.122538869820552
+    },
+    {
+      "threshold": 0.3,
+      "fraud_captured": 0.7857142857142857,
+      "false_positives": 651,
+      "false_positive_rate": 0.6106941838649156,
+      "false_negatives": 3,
+      "manual_review_volume": 662,
+      "expected_fraud_loss": 35.817200726618424
+    },
+    {
+      "threshold": 0.35,
+      "fraud_captured": 0.7857142857142857,
+      "false_positives": 568,
+      "false_positive_rate": 0.5328330206378987,
+      "false_negatives": 3,
+      "manual_review_volume": 579,
+      "expected_fraud_loss": 58.64795748325399
+    },
+    {
+      "threshold": 0.4,
+      "fraud_captured": 0.7142857142857143,
+      "false_positives": 490,
+      "false_positive_rate": 0.4596622889305816,
+      "false_negatives": 4,
+      "manual_review_volume": 500,
+      "expected_fraud_loss": 82.50755072687024
+    },
+    {
+      "threshold": 0.45,
+      "fraud_captured": 0.7142857142857143,
+      "false_positives": 397,
+      "false_positive_rate": 0.3724202626641651,
+      "false_negatives": 4,
+      "manual_review_volume": 407,
+      "expected_fraud_loss": 128.91405640561254
+    },
+    {
+      "threshold": 0.5,
+      "fraud_captured": 0.7142857142857143,
+      "false_positives": 316,
+      "false_positive_rate": 0.2964352720450281,
+      "false_negatives": 4,
+      "manual_review_volume": 326,
+      "expected_fraud_loss": 178.9931030973006
+    },
+    {
+      "threshold": 0.55,
+      "fraud_captured": 0.6428571428571429,
+      "false_positives": 245,
+      "false_positive_rate": 0.2298311444652908,
+      "false_negatives": 5,
+      "manual_review_volume": 254,
+      "expected_fraud_loss": 249.31760926043415
+    },
+    {
+      "threshold": 0.6,
+      "fraud_captured": 0.5,
+      "false_positives": 165,
+      "false_positive_rate": 0.15478424015009382,
+      "false_negatives": 7,
+      "manual_review_volume": 172,
+      "expected_fraud_loss": 379.07724687993425
+    },
+    {
+      "threshold": 0.65,
+      "fraud_captured": 0.42857142857142855,
+      "false_positives": 104,
+      "false_positive_rate": 0.0975609756097561,
+      "false_negatives": 8,
+      "manual_review_volume": 110,
+      "expected_fraud_loss": 572.9248580169182
+    },
+    {
+      "threshold": 0.7,
+      "fraud_captured": 0.21428571428571427,
+      "false_positives": 47,
+      "false_positive_rate": 0.04409005628517824,
+      "false_negatives": 11,
+      "manual_review_volume": 50,
+      "expected_fraud_loss": 891.1488096461568
+    },
+    {
+      "threshold": 0.75,
+      "fraud_captured": 0.14285714285714285,
+      "false_positives": 15,
+      "false_positive_rate": 0.014071294559099437,
+      "false_negatives": 12,
+      "manual_review_volume": 17,
+      "expected_fraud_loss": 1188.2000686862257
+    },
+    {
+      "threshold": 0.8,
+      "fraud_captured": 0.0,
+      "false_positives": 2,
+      "false_positive_rate": 0.001876172607879925,
+      "false_negatives": 14,
+      "manual_review_volume": 2,
+      "expected_fraud_loss": 1480.0783949423192
+    },
+    {
+      "threshold": 0.85,
+      "fraud_captured": 0.0,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "false_negatives": 14,
+      "manual_review_volume": 0,
+      "expected_fraud_loss": 1508.5917697809045
+    },
+    {
+      "threshold": 0.9,
+      "fraud_captured": 0.0,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "false_negatives": 14,
+      "manual_review_volume": 0,
+      "expected_fraud_loss": 1508.5917697809045
+    }
+  ],
+  "metrics": {
+    "PR_AUC": 0.04535928725105153,
+    "supervised_probability_PR_AUC": 0.08422484419304849,
+    "precision": 0.040697674418604654,
+    "recall": 0.5,
+    "fraud_capture_rate": 0.5,
+    "false_positive_rate": 0.15478424015009382,
+    "false_negative_rate": 0.5,
+    "expected_fraud_loss_avoided": 7767.869198315022,
+    "manual_review_volume": 140,
+    "ROC_AUC_secondary": 0.7184400964888771
+  },
+  "assumptions": {
+    "loss_severity": 0.9,
+    "labels": "fraud_flag is synthetic and disclosed for portfolio demonstration.",
+    "review_capacity": 140
+  }
+}
