@@ -1,5 +1,0 @@
-model_name,model_type,validation_view,segment,segment_value,segment_count,event_rate,average_score,risky_exposure,decision_rate_by_segment,status
-stablecoin_rule_risk_score,rule-based payments risk score,risk_action,stablecoin_risk_action,High-risk wallet,44,0.6136363636363636,0.9511750137500001,161749.24661176317,1.0,Pass
-stablecoin_rule_risk_score,rule-based payments risk score,risk_action,stablecoin_risk_action,Monitor,313,0.34824281150159747,0.5003588490734824,401022.8922802141,0.0,Pass
-stablecoin_rule_risk_score,rule-based payments risk score,risk_action,stablecoin_risk_action,Normal,1735,0.16023054755043228,0.20338678098559076,666774.4944788208,0.0,Pass
-stablecoin_rule_risk_score,rule-based payments risk score,risk_action,stablecoin_risk_action,Review,108,0.5185185185185185,0.7299403868055557,137954.2825582839,1.0,Pass
