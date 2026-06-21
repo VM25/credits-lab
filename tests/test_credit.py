@@ -3,7 +3,7 @@ from src import config
 from src.data import ingest_credit
 
 LEAK = {"recoveries","collection_recovery_fee","total_pymnt","total_rec_prncp",
-        "last_pymnt_d","last_pymnt_amnt","out_prncp","next_pymnt_d","loan_status"}
+        "total_rec_int","last_pymnt_d","last_pymnt_amnt","out_prncp","next_pymnt_d","loan_status"}
 
 def test_schema_target_and_no_leakage():
     df = ingest_credit.run()
