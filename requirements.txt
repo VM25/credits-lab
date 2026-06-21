@@ -1,3 +1,8 @@
 pandas
 numpy
 scipy
+scikit-learn
+joblib
+requests
+kaggle
+pytest
