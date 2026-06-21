@@ -2,7 +2,8 @@ from src import config
 
 def test_thresholds_ordered_and_in_range():
     assert 0 < config.PD_APPROVE < config.PD_DECLINE < 1
-    assert config.PD_APPROVE == 0.06 and config.PD_DECLINE == 0.12
+    assert config.PD_APPROVE == 0.15 and config.PD_DECLINE == 0.30
+    assert config.DOC_REFERENCE_PD_THRESHOLDS["approve"] == 0.06 and config.DOC_REFERENCE_PD_THRESHOLDS["decline"] == 0.12
     f = config.FRAUD_THRESHOLDS
     assert f["approve"] < f["stepup"] < f["review"] < f["block"]
     s = config.STABLECOIN_THRESHOLDS

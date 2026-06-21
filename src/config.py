@@ -9,9 +9,15 @@ OUTPUTS = ROOT / "data" / "outputs"
 SEED = 20260620
 
 # Underwriting policy (doc 03)
-PD_APPROVE = 0.06
-PD_DECLINE = 0.12
-RISK_GRADE_BANDS = [("A", 0.02), ("B", 0.05), ("C", 0.10), ("D", 0.20), ("E", 1.01)]  # upper bounds
+# Validation-derived default operating point for the 21%-base-rate accepted book
+# (model rank-orders/calibrates well; see decile evidence). Doc reference cutoffs
+# 0.06/0.12 retained below for the policy simulator.
+PD_APPROVE = 0.15
+PD_DECLINE = 0.30
+# Doc reference thresholds — retained for the Phase 8 policy simulator
+DOC_REFERENCE_PD_THRESHOLDS = {"approve": 0.06, "decline": 0.12}
+# Validation-rescaled from doc's starting bands to spread across this book's PD distribution
+RISK_GRADE_BANDS = [("A", 0.10), ("B", 0.18), ("C", 0.28), ("D", 0.40), ("E", 1.01)]  # upper bounds
 
 # Fraud policy (doc 04)
 FRAUD_THRESHOLDS = {"approve": 0.35, "stepup": 0.60, "review": 0.80, "block": 1.01}

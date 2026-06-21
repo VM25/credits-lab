@@ -1,36 +1,36 @@
 {
   "approval_mix": {
-    "approve": 9,
-    "decline": 57652,
-    "review": 12338
+    "approve": 16859,
+    "decline": 26455,
+    "review": 26685
   },
-  "approval_rate": 0.000129,
+  "approval_rate": 0.240846,
   "average_pd_by_decision": {
-    "approve": 0.003535,
-    "decline": 0.292068,
-    "review": 0.092662
+    "approve": 0.104931,
+    "decline": 0.391457,
+    "review": 0.219471
   },
   "champion_calibration": {
     "brier_after": 0.184648,
     "brier_before": 0.191188
   },
-  "decline_rate": 0.823612,
+  "decline_rate": 0.377934,
   "default_rate_by_decision": {
-    "approve": 0.111111,
-    "decline": 0.244484,
-    "review": 0.06403
+    "approve": 0.074085,
+    "decline": 0.340654,
+    "review": 0.173318
   },
   "expected_loss_by_decision": {
-    "approve": 33.40924,
-    "decline": 190968456.278102,
-    "review": 7890406.392945
+    "approve": 7819944.242173,
+    "decline": 111620666.249872,
+    "review": 42889908.433044
   },
   "expected_loss_by_risk_grade": {
-    "A": 0.0,
-    "B": 33.40924,
-    "C": 3318917.591883,
-    "D": 17785081.392981,
-    "E": 177754863.686183
+    "A": 2112071.876802,
+    "B": 8093726.033721,
+    "C": 40425207.89448,
+    "D": 49056568.406004,
+    "E": 62642944.714082
   },
   "pd_distribution": [
     {
@@ -134,21 +134,21 @@
       "count": 0
     }
   ],
-  "review_rate": 0.17626,
+  "review_rate": 0.38122,
   "risk_grade_distribution": {
-    "A": 8,
-    "B": 1,
-    "C": 6112,
-    "D": 17561,
-    "E": 46317
+    "A": 6121,
+    "B": 14032,
+    "C": 23349,
+    "D": 16221,
+    "E": 10276
   },
   "top_decline_reasons": {
-    "high_debt_to_income": 1799,
-    "high_predicted_default_risk": 57652,
-    "high_revolving_utilization": 8803,
-    "large_loan_amount": 14336,
-    "low_income_to_loan_coverage": 79,
-    "prior_delinquency": 11799,
-    "weak_credit_grade": 6924
+    "high_debt_to_income": 1445,
+    "high_predicted_default_risk": 26455,
+    "high_revolving_utilization": 4573,
+    "large_loan_amount": 7317,
+    "low_income_to_loan_coverage": 60,
+    "prior_delinquency": 5752,
+    "weak_credit_grade": 6882
   }
 }
