@@ -67,8 +67,8 @@ def run():
     raw_stable = pd.read_csv(config.PROCESSED / "processed_stablecoin_transactions.csv")
     raw_macro = pd.read_csv(config.PROCESSED / "macro_stress_inputs.csv")
 
-    uw_features = set(features.UNDERWRITING_FEATURES)
-    fr_features = set(features.FRAUD_FEATURES)
+    uw_features = set(features.underwriting_features(uw))
+    fr_features = set(features.fraud_features(fr))
 
     # --- leakage checks (compute status; raise at the end if any fail) ---
     leakage_failures = []

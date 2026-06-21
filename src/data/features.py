@@ -10,9 +10,10 @@ Builds three deterministic model datasets from the processed sources:
 * ``validation_dataset.csv`` - the held-out (val + test) underwriting rows used
   downstream for calibration and the final, untouched test.
 
-``UNDERWRITING_FEATURES`` and ``FRAUD_FEATURES`` are the canonical predictor
-lists consumed by the modelling and leakage-gate code. They MUST NOT contain any
-label-derived column (the core leakage guard).
+``underwriting_features(df)`` and ``fraud_features(df)`` return the canonical
+predictor lists consumed by the modelling and leakage-gate code. They are derived
+deterministically from a built dataframe and MUST NOT contain any label-derived
+column (the core leakage guard).
 """
 import numpy as np
 import pandas as pd
@@ -21,11 +22,40 @@ from src import config
 from src.data import splits
 from src.reporting.writers import write_csv
 
-# --- canonical predictor lists (populated by run()) --------------------------
-# Application-time numeric / encoded predictors for the underwriting model.
-UNDERWRITING_FEATURES = []
-# V1..V28 + engineered behavioural features for the fraud model.
-FRAUD_FEATURES = []
+# --- canonical feature-selection contract (the leakage guard) ----------------
+# Columns that are NEVER model predictors. ``underwriting_features()`` and
+# ``fraud_features()`` derive the predictor list deterministically from a built
+# dataframe as "numeric columns minus these". Keeping label-derived columns here
+# is the core leakage guard: default_flag / loss_amount_if_default (credit) and
+# fraud_flag / chargeback_loss (fraud) can never enter a feature list. These are
+# stateless functions (not module globals) to avoid any import-order fragility.
+UW_NON_FEATURE_COLS = {
+    "applicant_id", "application_date", "default_flag", "loss_amount_if_default",
+    "applicant_type", "is_synthetic_reject", "split",
+    "credit_grade", "loan_purpose", "home_ownership",
+    "credit_utilization_band", "loan_size_band",
+}
+FR_NON_FEATURE_COLS = {
+    "transaction_id", "account_id", "transaction_time", "fraud_flag",
+    "chargeback_loss", "is_synthetic_context", "split",
+    "merchant_category", "merchant_risk_band", "location_proxy",
+    "device_proxy", "account_tenure_band",
+}
+
+
+def underwriting_features(df):
+    """Deterministic underwriting predictor list: numeric columns minus the
+    non-feature / label-derived set. Stateless — safe to call any time."""
+    return [c for c in df.columns
+            if c not in UW_NON_FEATURE_COLS and pd.api.types.is_numeric_dtype(df[c])]
+
+
+def fraud_features(df):
+    """Deterministic fraud predictor list: numeric columns minus the non-feature
+    / label-derived set (always excludes fraud_flag and chargeback_loss)."""
+    return [c for c in df.columns
+            if c not in FR_NON_FEATURE_COLS and pd.api.types.is_numeric_dtype(df[c])]
+
 
 _CREDIT_GRADE_MAP = {"A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7}
 _UTIL_BAND_MAP = {"low": 0, "medium": 1, "high": 2, "very_high": 3}
@@ -39,7 +69,8 @@ def _safe_ratio(numer, denom):
 
 
 def _build_underwriting(credit: pd.DataFrame):
-    """Return (dataframe, feature_list) for the accepted-applicant underwriting model."""
+    """Return the accepted-applicant underwriting model dataframe (predictors are
+    derived later via ``underwriting_features``)."""
     # Accepted only: target must be populated.
     uw = credit[credit["applicant_type"] == "accepted"].copy()
     uw = uw[uw["default_flag"].notna()].reset_index(drop=True)
@@ -80,34 +111,16 @@ def _build_underwriting(credit: pd.DataFrame):
     for name, idx in sp.items():
         uw.loc[idx, "split"] = name
 
-    # Canonical predictor list: numeric / encoded application-time fields ONLY.
-    # EXCLUDES: ids, dates, target (default_flag), loss_amount_if_default
-    # (deterministic loan_amount*LGD - redundant/label-derived), applicant_type,
-    # is_synthetic_reject, split, and raw categoricals (credit_grade, home_ownership,
-    # loan_purpose, the readable band labels).
-    feature_list = [
-        "loan_amount",
-        "annual_income",
-        "debt_to_income",
-        "employment_length",
-        "interest_rate",
-        "delinquency_history",
-        "revolving_utilization",
-        "open_accounts",
-        "income_to_loan_ratio",
-        "debt_burden_score",
-        "credit_grade_numeric",
-        "prior_delinquency_flag",
-        "application_vintage",
-        "credit_utilization_band_ord",
-        "loan_size_band_ord",
-    ] + list(home_dummies.columns)
-
-    return uw, feature_list
+    # Predictors are derived later via underwriting_features(uw): numeric/encoded
+    # application-time fields only, excluding ids, dates, target (default_flag),
+    # loss_amount_if_default (redundant/label-derived), applicant_type,
+    # is_synthetic_reject, split, and raw categoricals.
+    return uw
 
 
 def _build_fraud(pay: pd.DataFrame):
-    """Return (dataframe, feature_list) for the payment-fraud model."""
+    """Return the payment-fraud model dataframe (predictors are derived later via
+    ``fraud_features``)."""
     fr = pay.copy()
     fr["transaction_time"] = pd.to_datetime(fr["transaction_time"], errors="coerce")
     # Stable order by account then time so windowed features have no lookahead.
@@ -174,45 +187,24 @@ def _build_fraud(pay: pd.DataFrame):
     for name, idx in sp.items():
         fr.loc[idx, "split"] = name
 
-    # Canonical predictor list. LEAKAGE-CRITICAL: NEVER include fraud_flag (target)
-    # or chargeback_loss (label-derived). Also excludes ids, transaction_time,
-    # is_synthetic_context, split, and raw categoricals.
-    v_cols = [f"V{i}" for i in range(1, 29)]
-    feature_list = v_cols + [
-        "amount",
-        "account_age_days",
-        "transaction_count_24h",
-        "amount_count_24h",
-        "velocity_1h",
-        "velocity_24h",
-        "amount_zscore_by_account",
-        "merchant_risk_score",
-        "new_device_flag",
-        "new_location_flag",
-        "night_transaction_flag",
-        "high_amount_flag",
-        "account_tenure_band_ord",
-    ]
-
-    return fr, feature_list
+    # Predictors are derived later via fraud_features(fr). LEAKAGE-CRITICAL: that
+    # function NEVER includes fraud_flag (target) or chargeback_loss (label-derived);
+    # it also excludes ids, transaction_time, is_synthetic_context, split, and raw
+    # categoricals, yielding V1..V28 + the engineered behavioural features.
+    return fr
 
 
 def run():
     """Build and persist the three model datasets; return ``(uw, fr, val)``.
 
-    Also (re)populates module-level ``UNDERWRITING_FEATURES`` and
-    ``FRAUD_FEATURES`` with the canonical predictor lists.
+    Canonical predictor lists are obtained via ``underwriting_features(uw)`` and
+    ``fraud_features(fr)`` (stateless), not module globals.
     """
-    global UNDERWRITING_FEATURES, FRAUD_FEATURES
-
     credit = pd.read_csv(config.PROCESSED / "processed_credit_applicants.csv")
     pay = pd.read_csv(config.PROCESSED / "processed_payment_transactions.csv")
 
-    uw, uw_features = _build_underwriting(credit)
-    fr, fr_features = _build_fraud(pay)
-
-    UNDERWRITING_FEATURES = uw_features
-    FRAUD_FEATURES = fr_features
+    uw = _build_underwriting(credit)
+    fr = _build_fraud(pay)
 
     # Validation dataset: held-out underwriting rows (val + test).
     val = uw[uw["split"].isin(["val", "test"])].reset_index(drop=True)
