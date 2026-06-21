@@ -23,7 +23,7 @@ Deterministic: seeded via config.SEED throughout. Re-runs produce identical
 output.
 """
 import zipfile
-from datetime import datetime, timezone
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
