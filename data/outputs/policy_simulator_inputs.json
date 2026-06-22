@@ -1,0 +1,78 @@
+{
+  "credit": {
+    "approve_pd_cutoff": {
+      "default": 0.15,
+      "doc_reference": 0.06,
+      "options": [
+        0.06,
+        0.1,
+        0.15,
+        0.2,
+        0.25
+      ]
+    },
+    "decline_pd_cutoff_default": 0.3,
+    "review_band": {
+      "note": "decline cutoff = approve cutoff + review band",
+      "value": 0.15
+    }
+  },
+  "defaults": {
+    "approve": 0.15,
+    "decline": 0.3,
+    "fraud_review": 0.8,
+    "stablecoin_high_risk": 0.85,
+    "stress": "base"
+  },
+  "fraud": {
+    "block_threshold": 1.01,
+    "loss_severity": 0.9,
+    "manual_review_capacity": 250,
+    "review_threshold": {
+      "default": 0.8,
+      "options": [
+        0.5,
+        0.6,
+        0.7,
+        0.8
+      ]
+    }
+  },
+  "stablecoin": {
+    "high_risk_threshold": {
+      "default": 0.85,
+      "options": [
+        0.65,
+        0.75,
+        0.85
+      ]
+    },
+    "monitor_threshold": 0.4,
+    "review_threshold": 0.65
+  },
+  "stress": {
+    "default": "base",
+    "multipliers": {
+      "base": {
+        "fraud_mult": 1.0,
+        "lgd_mult": 1.0,
+        "pd_mult": 1.0
+      },
+      "moderate": {
+        "fraud_mult": 1.2,
+        "lgd_mult": 1.1,
+        "pd_mult": 1.25
+      },
+      "severe": {
+        "fraud_mult": 1.5,
+        "lgd_mult": 1.25,
+        "pd_mult": 1.6
+      }
+    },
+    "options": [
+      "base",
+      "moderate",
+      "severe"
+    ]
+  }
+}
