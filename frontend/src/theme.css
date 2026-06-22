@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Approved tokens, also exposed for chart libraries (Recharts needs raw values). */
+  --bg: #d8e0d7;
+  --panel: #c7d2c6;
+  --panel-2: #bcc9bb;
+  --line: #9caf9d;
+  --ink: #18241e;
+  --ink-soft: #45554c;
+  --accent: #285c5e;
+  --pass: #35684f;
+  --review: #6c6440;
+  --fail: #7c4b40;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Fira Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tabular, ledger-style numerics. Code ligatures off for data. */
+.num {
+  font-family: "Fira Code", ui-monospace, monospace;
+  font-variant-ligatures: none;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Register-style section labels (uppercase mono). */
+.reg {
+  font-family: "Fira Code", ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* Flat: kill default focus glow but keep an accessible ring. */
+*:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
