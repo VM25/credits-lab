@@ -293,17 +293,21 @@ def build() -> dict:
     headline_pr_auc = float(_pr_auc(y_test, score_test))
     headline_roc_auc = float(_roc_auc(y_test, score_test))
 
-    # Decision boundary for fraud capture: review + block (score >= FRAUD_THRESHOLDS["review"])
-    review_boundary = config.FRAUD_THRESHOLDS["review"]
-    conf_review = confusion_at(y_test, score_test, review_boundary)
-    precision_v, recall_v = precision_recall_from_confusion(conf_review)
+    # Capture boundary = the review + block actions, i.e. score >= 0.60, the
+    # lower edge of the review band (= FRAUD_THRESHOLDS["stepup"]). This matches
+    # payment_action in {review, block} used for expected_fraud_loss_avoided
+    # below, so capture/precision/recall and loss-avoided are measured at the
+    # same operating point. (FRAUD_THRESHOLDS["review"]=0.80 is the BLOCK edge.)
+    flag_boundary = config.FRAUD_THRESHOLDS["stepup"]
+    conf_flag = confusion_at(y_test, score_test, flag_boundary)
+    precision_v, recall_v = precision_recall_from_confusion(conf_flag)
 
-    # fraud_capture_rate = recall at review/block boundary
+    # fraud_capture_rate = recall at the review+block boundary
     fraud_capture_rate = recall_v
 
-    # FPR, FNR at the review boundary
+    # FPR, FNR at the review+block boundary
     tn, fp, fn, tp = (
-        conf_review["tn"], conf_review["fp"], conf_review["fn"], conf_review["tp"]
+        conf_flag["tn"], conf_flag["fp"], conf_flag["fn"], conf_flag["tp"]
     )
     fpr = fp / (fp + tn) if (fp + tn) > 0 else 0.0
     fnr = fn / (fn + tp) if (fn + tp) > 0 else 0.0

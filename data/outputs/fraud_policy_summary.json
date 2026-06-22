@@ -17,9 +17,9 @@
     "review": 143040.804,
     "step_up": 233008.1101
   },
-  "false_negative_rate": 0.230769,
-  "false_positive_rate": 0.002176,
-  "fraud_capture_rate": 0.769231,
+  "false_negative_rate": 0.192308,
+  "false_positive_rate": 0.009876,
+  "fraud_capture_rate": 0.807692,
   "fraud_score_distribution": {
     "bins": [
       0.0,
@@ -52,8 +52,8 @@
   "model_note": "Supervised: LogisticRegression(class_weight='balanced', max_iter=1000). Anomaly: IsolationForest(contamination='auto'). Composite = 0.80*fraud_probability + 0.10*anomaly_score + 0.10*rule_score. High weight on supervised probability ensures actual frauds (prob~1.0) breach the 0.80 review/block threshold; anomaly and rule scores provide interpretable secondary signal without degrading the primary discriminative power.",
   "note": "Fraud labels are heavily imbalanced (~0.6% positive rate). Accuracy is NOT used as a headline metric. PR-AUC (precision-recall area) is the primary performance indicator.",
   "pr_auc": 0.659176,
-  "precision": 0.606061,
-  "recall": 0.769231,
+  "precision": 0.2625,
+  "recall": 0.807692,
   "roc_auc": 0.971088,
   "threshold_tradeoff": [
     {
