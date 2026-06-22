@@ -1,0 +1,51 @@
+{
+  "assumptions": {
+    "fraud_loss_severity": 0.9,
+    "lgd_by_risk": {
+      "high": 0.75,
+      "low": 0.35,
+      "standard": 0.55
+    },
+    "note": "Assumption-driven estimates, not observed realized losses.",
+    "stress": {
+      "base": {
+        "fraud_mult": 1.0,
+        "lgd_mult": 1.0,
+        "pd_mult": 1.0
+      },
+      "moderate": {
+        "fraud_mult": 1.2,
+        "lgd_mult": 1.1,
+        "pd_mult": 1.25
+      },
+      "severe": {
+        "fraud_mult": 1.5,
+        "lgd_mult": 1.25,
+        "pd_mult": 1.6
+      }
+    },
+    "utilization": 0.65
+  },
+  "average_pd": 0.256884,
+  "expected_loss_by_decision": {
+    "approve": 7819944.24,
+    "decline": 111620666.25,
+    "review": 42889908.43
+  },
+  "expected_loss_by_risk_grade": {
+    "A": 2112071.88,
+    "B": 8093726.03,
+    "C": 40425207.89,
+    "D": 49056568.41,
+    "E": 62642944.71
+  },
+  "loss_waterfall": {
+    "expected_credit_loss": 162330518.92,
+    "expected_fraud_loss": 901091.5,
+    "stablecoin_risk_exposure": 4347188.12
+  },
+  "total_approved_exposure": 211657250.0,
+  "total_expected_credit_loss": 162330518.92,
+  "total_expected_fraud_loss": 901091.5,
+  "total_stablecoin_risk_exposure": 4347188.12
+}
