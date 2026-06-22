@@ -1,0 +1,3 @@
+model,model_type,roc_auc,pr_auc,brier,ks,precision,recall,tp,fp,tn,fn,brier_before_cal,brier_after_cal,psi,psi_status
+champion_scorecard,logistic_scorecard,0.694804,0.420335,0.180514,0.320284,0.39168,0.666433,1902,2954,4693,952,0.191188,0.184648,0.071913,stable
+challenger_gbm,gradient_boosting,0.69596,0.425588,0.179681,0.316229,0.40579,0.599159,1710,2504,5143,1144,0.190422,0.184769,0.030119,stable

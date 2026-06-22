@@ -1,0 +1,2 @@
+model,model_type,discrimination_auc_vs_synthetic_label,high_risk_wallet_concentration,count_normal,count_monitor,count_review,count_high_risk,note
+stablecoin_risk_scoring,rule_and_indicator_scoring,0.484752,0.006329,1611,673,212,4,AML-style risk indicators — discrimination AUC measures separation against synthetic risk label; score not trained on this label.
