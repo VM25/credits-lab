@@ -52,11 +52,11 @@
     "explainability_status": "transparent_reason_codes",
     "model_name": "stablecoin_risk_scoring",
     "model_type": "rule_and_indicator_scoring",
-    "primary_metric": 0.484752,
+    "primary_metric": 0.871338,
     "primary_metric_name": "discrimination_auc_vs_synthetic_label",
     "segment_status": "not_computed",
     "stability_status": "not_computed",
-    "validation_verdict": "Fail",
-    "verdict_reason": "Stablecoin AML-style risk indicator scoring shows insufficient discrimination (AUC=0.4848); risk-tiering logic may require recalibration."
+    "validation_verdict": "Pass",
+    "verdict_reason": "Stablecoin AML-style risk indicator scoring system shows strong discrimination (AUC=0.8713) against synthetic risk label; action mix and concentration metrics are within expected ranges for a risk-tiering system."
   }
 ]

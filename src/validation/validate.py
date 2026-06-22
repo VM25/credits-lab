@@ -356,17 +356,22 @@ def _validate_fraud():
 # ---------------------------------------------------------------------------
 
 def _validate_stablecoin():
-    sa = pd.read_csv(config.OUTPUTS / "stablecoin_alerts.csv")
-    sc = pd.read_csv(config.PROCESSED / "processed_stablecoin_transactions.csv")
+    from src.risk import stablecoin as sc_mod
 
-    # Merge on wallet + counterparty + time for label join
-    # alerts are a 1:1 row mapping with processed_stablecoin_transactions (same order/rows)
-    # Join on row index (both derived from same source)
-    assert len(sa) == len(sc), "Row count mismatch between alerts and processed stablecoin"
-    sc_label = sc["stablecoin_risk_label"].values
-    scores   = sa["stablecoin_risk_score"].values
-    actions  = sa["stablecoin_risk_action"].values
-    exposure = sa["risk_exposure_score"].values
+    sc = pd.read_csv(config.PROCESSED / "processed_stablecoin_transactions.csv")
+    # Re-derive the score on the processed data so the score and the synthetic
+    # label stay ROW-ALIGNED. score_frame() sorts rows by (wallet, time), so the
+    # alerts CSV is in a different order than the original-order processed label;
+    # reading them side-by-side would misalign score vs label and corrupt the
+    # discrimination AUC. score_frame copies the frame (label rides along, aligned).
+    scored = sc_mod.score_frame(sc)
+    scored["stablecoin_risk_action"] = scored["stablecoin_risk_score"].apply(sc_mod.action)
+    sc_label = scored["stablecoin_risk_label"].values
+    scores   = scored["stablecoin_risk_score"].values
+    actions  = scored["stablecoin_risk_action"].values
+    exposure = scored["risk_exposure_score"].values
+    # Reason-code frequency is order-independent, so read it from the alerts file.
+    sa = pd.read_csv(config.OUTPUTS / "stablecoin_alerts.csv")
 
     # Score distribution
     score_hist, score_edges = np.histogram(scores, bins=10, range=(0, 1))
