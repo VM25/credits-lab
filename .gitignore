@@ -36,3 +36,6 @@ data/raw/
 
 # Local Netlify folder
 .netlify
+
+# package-lock omitted so CI uses npm install (fixes npm optional-dep/rollup-native bug on Linux)
+frontend/package-lock.json
