@@ -1,9 +1,10 @@
-# Netlify build config. The site lives in frontend/; its build copies the
-# backend's committed data/outputs into the bundle (see frontend predev/prebuild).
+# Netlify build config. The site lives in frontend/ and is self-contained:
+# the data it serves is committed at frontend/public/data/outputs, so the CI
+# build is a plain `vite build` with no cross-directory steps.
 [build]
   base = "frontend"
   command = "npm run build"
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"

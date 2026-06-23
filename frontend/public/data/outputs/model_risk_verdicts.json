@@ -1,0 +1,62 @@
+[
+  {
+    "calibration_status": "fail",
+    "explainability_status": "transparent",
+    "model_name": "champion_scorecard",
+    "model_type": "logistic_scorecard",
+    "primary_metric": 0.694804,
+    "primary_metric_name": "roc_auc",
+    "segment_status": "acceptable",
+    "stability_status": "stable",
+    "validation_verdict": "Monitor",
+    "verdict_reason": "Champion scorecard has acceptable discrimination (AUC=0.6948) but requires monitoring: calibration Brier-after=0.1846, 0 weak segment(s) detected."
+  },
+  {
+    "calibration_status": "fail",
+    "explainability_status": "opaque_importances",
+    "model_name": "challenger_gbm",
+    "model_type": "gradient_boosting",
+    "primary_metric": 0.69596,
+    "primary_metric_name": "roc_auc",
+    "segment_status": "not_computed",
+    "stability_status": "stable",
+    "validation_verdict": "Monitor",
+    "verdict_reason": "Challenger GBM has adequate discrimination (AUC=0.6960) but requires monitoring: Brier-after=0.1848, PSI=0.0301 (stable), reduced explainability."
+  },
+  {
+    "calibration_status": "not_calibrated",
+    "explainability_status": "transparent",
+    "model_name": "fraud_supervised",
+    "model_type": "logistic_balanced",
+    "primary_metric": 0.791187,
+    "primary_metric_name": "pr_auc",
+    "segment_status": "not_computed",
+    "stability_status": "not_computed",
+    "validation_verdict": "Pass",
+    "verdict_reason": "Fraud supervised model passes: PR-AUC=0.7912 (headline), fraud capture rate at stepup threshold=0.8077, ROC-AUC=0.9755."
+  },
+  {
+    "calibration_status": "not_applicable_unsupervised",
+    "explainability_status": "opaque",
+    "model_name": "fraud_anomaly",
+    "model_type": "isolation_forest",
+    "primary_metric": 0.926771,
+    "primary_metric_name": "sanity_roc_auc_vs_fraud_label",
+    "segment_status": "not_computed",
+    "stability_status": "not_computed",
+    "validation_verdict": "Pass",
+    "verdict_reason": "Fraud anomaly model (Isolation Forest) shows useful discrimination: sanity AUC=0.9268 vs fraud label; suitable as a complementary unsupervised signal alongside the supervised model."
+  },
+  {
+    "calibration_status": "not_applicable_scoring_system",
+    "explainability_status": "transparent_reason_codes",
+    "model_name": "stablecoin_risk_scoring",
+    "model_type": "rule_and_indicator_scoring",
+    "primary_metric": 0.871338,
+    "primary_metric_name": "discrimination_auc_vs_synthetic_label",
+    "segment_status": "not_computed",
+    "stability_status": "not_computed",
+    "validation_verdict": "Pass",
+    "verdict_reason": "Stablecoin AML-style risk indicator scoring system shows strong discrimination (AUC=0.8713) against synthetic risk label; action mix and concentration metrics are within expected ranges for a risk-tiering system."
+  }
+]

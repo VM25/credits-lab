@@ -1,0 +1,73 @@
+{
+  "auc_gap_challenger_minus_champion": 0.001156,
+  "brier_after_cal_gap_challenger_minus_champion": 0.000121,
+  "challenger": {
+    "brier": 0.179681,
+    "brier_after_cal": 0.184769,
+    "calibration_quality": "adequate",
+    "explainability": "tree_importances_opaque",
+    "model": "challenger_gbm",
+    "pr_auc": 0.425588,
+    "psi": 0.030119,
+    "psi_status": "stable",
+    "roc_auc": 0.69596,
+    "top_importances": [
+      [
+        "credit_grade_numeric",
+        0.507917
+      ],
+      [
+        "interest_rate",
+        0.188318
+      ],
+      [
+        "income_to_loan_ratio",
+        0.076317
+      ],
+      [
+        "application_vintage",
+        0.052169
+      ],
+      [
+        "loan_amount",
+        0.04476
+      ]
+    ]
+  },
+  "champion": {
+    "brier": 0.180514,
+    "brier_after_cal": 0.184648,
+    "calibration_quality": "adequate",
+    "explainability": "transparent_coefficients",
+    "model": "champion_scorecard",
+    "pr_auc": 0.420335,
+    "psi": 0.071913,
+    "psi_status": "stable",
+    "roc_auc": 0.694804,
+    "top_coefficients": [
+      [
+        "credit_grade_numeric",
+        0.375422
+      ],
+      [
+        "interest_rate",
+        0.245752
+      ],
+      [
+        "loan_size_band_ord",
+        0.148163
+      ],
+      [
+        "income_to_loan_ratio",
+        -0.127652
+      ],
+      [
+        "application_vintage",
+        0.09469
+      ]
+    ],
+    "weak_segments": 0
+  },
+  "rationale": "Champion logistic scorecard is preferred for regulatory explainability (transparent coefficients) and comparable performance (ROC-AUC champion=0.6948 vs challenger=0.6960, delta=0.0012); champion calibration Brier-after=0.1846 is better and PSI=0.0719 (stable). AUC uplift does not justify loss of direct coefficient interpretability.",
+  "recommendation": "champion_scorecard"
+}

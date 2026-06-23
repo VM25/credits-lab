@@ -1,0 +1,875 @@
+{
+  "calibration_curve": [
+    {
+      "count": 593,
+      "mean_predicted": 0.084317,
+      "observed": 0.084317
+    },
+    {
+      "count": 1327,
+      "mean_predicted": 0.117558,
+      "observed": 0.117558
+    },
+    {
+      "count": 915,
+      "mean_predicted": 0.177049,
+      "observed": 0.177049
+    },
+    {
+      "count": 1546,
+      "mean_predicted": 0.201164,
+      "observed": 0.201164
+    },
+    {
+      "count": 1580,
+      "mean_predicted": 0.267722,
+      "observed": 0.267722
+    },
+    {
+      "count": 709,
+      "mean_predicted": 0.315938,
+      "observed": 0.315938
+    },
+    {
+      "count": 1399,
+      "mean_predicted": 0.360972,
+      "observed": 0.360972
+    },
+    {
+      "count": 1329,
+      "mean_predicted": 0.398044,
+      "observed": 0.398044
+    },
+    {
+      "count": 1101,
+      "mean_predicted": 0.494096,
+      "observed": 0.494096
+    }
+  ],
+  "champion_vs_challenger": {
+    "auc_gap_challenger_minus_champion": 0.001156,
+    "brier_after_cal_gap_challenger_minus_champion": 0.000121,
+    "challenger": {
+      "brier": 0.179681,
+      "brier_after_cal": 0.184769,
+      "calibration_quality": "adequate",
+      "explainability": "tree_importances_opaque",
+      "model": "challenger_gbm",
+      "pr_auc": 0.425588,
+      "psi": 0.030119,
+      "psi_status": "stable",
+      "roc_auc": 0.69596,
+      "top_importances": [
+        [
+          "credit_grade_numeric",
+          0.507917
+        ],
+        [
+          "interest_rate",
+          0.188318
+        ],
+        [
+          "income_to_loan_ratio",
+          0.076317
+        ],
+        [
+          "application_vintage",
+          0.052169
+        ],
+        [
+          "loan_amount",
+          0.04476
+        ]
+      ]
+    },
+    "champion": {
+      "brier": 0.180514,
+      "brier_after_cal": 0.184648,
+      "calibration_quality": "adequate",
+      "explainability": "transparent_coefficients",
+      "model": "champion_scorecard",
+      "pr_auc": 0.420335,
+      "psi": 0.071913,
+      "psi_status": "stable",
+      "roc_auc": 0.694804,
+      "top_coefficients": [
+        [
+          "credit_grade_numeric",
+          0.375422
+        ],
+        [
+          "interest_rate",
+          0.245752
+        ],
+        [
+          "loan_size_band_ord",
+          0.148163
+        ],
+        [
+          "income_to_loan_ratio",
+          -0.127652
+        ],
+        [
+          "application_vintage",
+          0.09469
+        ]
+      ],
+      "weak_segments": 0
+    },
+    "rationale": "Champion logistic scorecard is preferred for regulatory explainability (transparent coefficients) and comparable performance (ROC-AUC champion=0.6948 vs challenger=0.6960, delta=0.0012); champion calibration Brier-after=0.1846 is better and PSI=0.0719 (stable). AUC uplift does not justify loss of direct coefficient interpretability.",
+    "recommendation": "champion_scorecard"
+  },
+  "credit_challenger_metrics": {
+    "brier": 0.179681,
+    "brier_after_cal": 0.184769,
+    "brier_before_cal": 0.190422,
+    "fn": 1144,
+    "fp": 2504,
+    "ks": 0.316229,
+    "model": "challenger_gbm",
+    "model_type": "gradient_boosting",
+    "pr_auc": 0.425588,
+    "precision": 0.40579,
+    "psi": 0.030119,
+    "psi_status": "stable",
+    "recall": 0.599159,
+    "roc_auc": 0.69596,
+    "tn": 5143,
+    "tp": 1710
+  },
+  "credit_champion_metrics": {
+    "brier": 0.180514,
+    "brier_after_cal": 0.184648,
+    "brier_before_cal": 0.191188,
+    "fn": 952,
+    "fp": 2954,
+    "ks": 0.320284,
+    "model": "champion_scorecard",
+    "model_type": "logistic_scorecard",
+    "pr_auc": 0.420335,
+    "precision": 0.39168,
+    "psi": 0.071913,
+    "psi_status": "stable",
+    "recall": 0.666433,
+    "roc_auc": 0.694804,
+    "tn": 4693,
+    "tp": 1902
+  },
+  "decile_default_table": [
+    {
+      "actual_default_rate": 0.067866,
+      "count": 1223,
+      "decile": 1,
+      "pd_mean": 0.091393
+    },
+    {
+      "actual_default_rate": 0.120502,
+      "count": 1195,
+      "decile": 2,
+      "pd_mean": 0.137021
+    },
+    {
+      "actual_default_rate": 0.194522,
+      "count": 1789,
+      "decile": 3,
+      "pd_mean": 0.198987
+    },
+    {
+      "actual_default_rate": 0.261872,
+      "count": 1432,
+      "decile": 4,
+      "pd_mean": 0.266971
+    },
+    {
+      "actual_default_rate": 0.281525,
+      "count": 682,
+      "decile": 5,
+      "pd_mean": 0.315443
+    },
+    {
+      "actual_default_rate": 0.342037,
+      "count": 1532,
+      "decile": 6,
+      "pd_mean": 0.363051
+    },
+    {
+      "actual_default_rate": 0.392336,
+      "count": 548,
+      "decile": 7,
+      "pd_mean": 0.385336
+    },
+    {
+      "actual_default_rate": 0.41798,
+      "count": 1079,
+      "decile": 8,
+      "pd_mean": 0.406649
+    },
+    {
+      "actual_default_rate": 0.511263,
+      "count": 1021,
+      "decile": 9,
+      "pd_mean": 0.518361
+    }
+  ],
+  "description": "Model-risk validation summary \u2014 Phase 7. Calibration curve and decile default table are embedded here (chart-embedding map). No separate calibration_curve.json or decile_default_table.csv are written.",
+  "fraud_anomaly_metrics": {
+    "model": "fraud_anomaly",
+    "model_type": "isolation_forest",
+    "note": "Unsupervised model \u2014 sanity AUC measures discrimination vs fraud label; not used as primary fraud classifier.",
+    "sanity_roc_auc_vs_fraud_label": 0.926771,
+    "score_distribution_alerts": [
+      {
+        "bin_high": 0.1,
+        "bin_low": 0.0,
+        "count": 18137
+      },
+      {
+        "bin_high": 0.2,
+        "bin_low": 0.1,
+        "count": 36503
+      },
+      {
+        "bin_high": 0.3,
+        "bin_low": 0.2,
+        "count": 17688
+      },
+      {
+        "bin_high": 0.4,
+        "bin_low": 0.3,
+        "count": 4685
+      },
+      {
+        "bin_high": 0.5,
+        "bin_low": 0.4,
+        "count": 1554
+      },
+      {
+        "bin_high": 0.6,
+        "bin_low": 0.5,
+        "count": 790
+      },
+      {
+        "bin_high": 0.7,
+        "bin_low": 0.6,
+        "count": 379
+      },
+      {
+        "bin_high": 0.8,
+        "bin_low": 0.7,
+        "count": 128
+      },
+      {
+        "bin_high": 0.9,
+        "bin_low": 0.8,
+        "count": 97
+      },
+      {
+        "bin_high": 1.0,
+        "bin_low": 0.9,
+        "count": 39
+      }
+    ],
+    "score_distribution_test": [
+      {
+        "bin_high": 0.1,
+        "bin_low": 0.0,
+        "count": 2322
+      },
+      {
+        "bin_high": 0.2,
+        "bin_low": 0.1,
+        "count": 6070
+      },
+      {
+        "bin_high": 0.3,
+        "bin_low": 0.2,
+        "count": 2641
+      },
+      {
+        "bin_high": 0.4,
+        "bin_low": 0.3,
+        "count": 604
+      },
+      {
+        "bin_high": 0.5,
+        "bin_low": 0.4,
+        "count": 199
+      },
+      {
+        "bin_high": 0.6,
+        "bin_low": 0.5,
+        "count": 105
+      },
+      {
+        "bin_high": 0.7,
+        "bin_low": 0.6,
+        "count": 52
+      },
+      {
+        "bin_high": 0.8,
+        "bin_low": 0.7,
+        "count": 5
+      },
+      {
+        "bin_high": 0.9,
+        "bin_low": 0.8,
+        "count": 2
+      },
+      {
+        "bin_high": 1.0,
+        "bin_low": 0.9,
+        "count": 0
+      }
+    ]
+  },
+  "fraud_pr_curve": [
+    {
+      "precision": 0.004333,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.004574,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.004843,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.005145,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.005489,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.00588,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.006333,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.006861,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.007484,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.008233,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.009147,
+      "recall": 1.0
+    },
+    {
+      "precision": 0.010093,
+      "recall": 0.980769
+    },
+    {
+      "precision": 0.011533,
+      "recall": 0.980769
+    },
+    {
+      "precision": 0.013456,
+      "recall": 0.980769
+    },
+    {
+      "precision": 0.016149,
+      "recall": 0.980769
+    },
+    {
+      "precision": 0.019786,
+      "recall": 0.961538
+    },
+    {
+      "precision": 0.026385,
+      "recall": 0.961538
+    },
+    {
+      "precision": 0.037184,
+      "recall": 0.903846
+    },
+    {
+      "precision": 0.072785,
+      "recall": 0.884615
+    },
+    {
+      "precision": 1.0,
+      "recall": 0.0
+    }
+  ],
+  "fraud_supervised_metrics": {
+    "false_negative_rate": 0.192308,
+    "false_positive_rate": 0.017911,
+    "fn": 10,
+    "fp": 214,
+    "fraud_capture_rate": 0.807692,
+    "model": "fraud_supervised",
+    "model_type": "logistic_balanced",
+    "pr_auc": 0.791187,
+    "precision_at_stepup": 0.164062,
+    "recall_at_stepup": 0.807692,
+    "roc_auc": 0.975484,
+    "score_distribution": [
+      {
+        "bin_high": 0.1,
+        "bin_low": 0.0,
+        "count": 10184
+      },
+      {
+        "bin_high": 0.2,
+        "bin_low": 0.1,
+        "count": 766
+      },
+      {
+        "bin_high": 0.3,
+        "bin_low": 0.2,
+        "count": 335
+      },
+      {
+        "bin_high": 0.4,
+        "bin_low": 0.3,
+        "count": 201
+      },
+      {
+        "bin_high": 0.5,
+        "bin_low": 0.4,
+        "count": 153
+      },
+      {
+        "bin_high": 0.6,
+        "bin_low": 0.5,
+        "count": 105
+      },
+      {
+        "bin_high": 0.7,
+        "bin_low": 0.6,
+        "count": 70
+      },
+      {
+        "bin_high": 0.8,
+        "bin_low": 0.7,
+        "count": 62
+      },
+      {
+        "bin_high": 0.9,
+        "bin_low": 0.8,
+        "count": 33
+      },
+      {
+        "bin_high": 1.0,
+        "bin_low": 0.9,
+        "count": 91
+      }
+    ],
+    "tn": 11734,
+    "tp": 42
+  },
+  "predicted_vs_actual_by_band": [
+    {
+      "actual_default_rate": 0.043143,
+      "count": 649,
+      "predicted_mean_pd": 0.083441,
+      "risk_grade": "A"
+    },
+    {
+      "actual_default_rate": 0.114607,
+      "count": 1780,
+      "predicted_mean_pd": 0.125387,
+      "risk_grade": "B"
+    },
+    {
+      "actual_default_rate": 0.223676,
+      "count": 3210,
+      "predicted_mean_pd": 0.229427,
+      "risk_grade": "C"
+    },
+    {
+      "actual_default_rate": 0.336953,
+      "count": 2763,
+      "predicted_mean_pd": 0.355731,
+      "risk_grade": "D"
+    },
+    {
+      "actual_default_rate": 0.463554,
+      "count": 2099,
+      "predicted_mean_pd": 0.460993,
+      "risk_grade": "E"
+    }
+  ],
+  "psi": {
+    "challenger": {
+      "status": "stable",
+      "value": 0.030119
+    },
+    "champion": {
+      "status": "stable",
+      "value": 0.071913
+    }
+  },
+  "segment_performance": [
+    {
+      "average_score": 0.114135,
+      "count": 1788,
+      "divergence": 0.030802,
+      "event_rate": 0.083333,
+      "segment_type": "credit_grade",
+      "segment_value": "A",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.204212,
+      "count": 2885,
+      "divergence": 0.001334,
+      "event_rate": 0.205546,
+      "segment_type": "credit_grade",
+      "segment_value": "B",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.319542,
+      "count": 3261,
+      "divergence": 0.008901,
+      "event_rate": 0.310641,
+      "segment_type": "credit_grade",
+      "segment_value": "C",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.398946,
+      "count": 1656,
+      "divergence": 0.011265,
+      "event_rate": 0.387681,
+      "segment_type": "credit_grade",
+      "segment_value": "D",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.482545,
+      "count": 599,
+      "divergence": 0.009942,
+      "event_rate": 0.492487,
+      "segment_type": "credit_grade",
+      "segment_value": "E",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.567234,
+      "count": 202,
+      "divergence": 0.02763,
+      "event_rate": 0.539604,
+      "segment_type": "credit_grade",
+      "segment_value": "F",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.588927,
+      "count": 110,
+      "divergence": 0.107109,
+      "event_rate": 0.481818,
+      "segment_type": "credit_grade",
+      "segment_value": "G",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.315766,
+      "count": 2634,
+      "divergence": 0.005798,
+      "event_rate": 0.321564,
+      "segment_type": "income_band",
+      "segment_value": "low",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.292291,
+      "count": 2617,
+      "divergence": 0.019841,
+      "event_rate": 0.272449,
+      "segment_type": "income_band",
+      "segment_value": "mid_low",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.27672,
+      "count": 2632,
+      "divergence": 0.019501,
+      "event_rate": 0.257219,
+      "segment_type": "income_band",
+      "segment_value": "mid_high",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.244208,
+      "count": 2618,
+      "divergence": 0.008532,
+      "event_rate": 0.235676,
+      "segment_type": "income_band",
+      "segment_value": "high",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.247231,
+      "count": 6348,
+      "divergence": 0.009204,
+      "event_rate": 0.238028,
+      "segment_type": "dti_band",
+      "segment_value": "low",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.319332,
+      "count": 2991,
+      "divergence": 0.016089,
+      "event_rate": 0.303243,
+      "segment_type": "dti_band",
+      "segment_value": "moderate",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.365829,
+      "count": 929,
+      "divergence": 0.006615,
+      "event_rate": 0.372443,
+      "segment_type": "dti_band",
+      "segment_value": "elevated",
+      "weak_segment": false
+    },
+    {
+      "average_score": 0.430884,
+      "count": 189,
+      "divergence": 0.044641,
+      "event_rate": 0.386243,
+      "segment_type": "dti_band",
+      "segment_value": "high",
+      "weak_segment": false
+    }
+  ],
+  "stablecoin": {
+    "discrimination_auc_vs_synthetic_label": 0.871338,
+    "high_risk_wallet_concentration": 0.006329,
+    "note": "AML-style risk indicators \u2014 discrimination AUC measures separation against synthetic risk label; score not trained on this label.",
+    "risk_action_mix": {
+      "high_risk": {
+        "count": 4,
+        "share": 0.0016
+      },
+      "monitor": {
+        "count": 673,
+        "share": 0.2692
+      },
+      "normal": {
+        "count": 1611,
+        "share": 0.6444
+      },
+      "review": {
+        "count": 212,
+        "share": 0.0848
+      }
+    },
+    "risky_exposure_by_score_band": [
+      {
+        "count": 220,
+        "score_band": "0.0-0.2",
+        "total_risk_exposure": 47475.4461
+      },
+      {
+        "count": 1391,
+        "score_band": "0.2-0.4",
+        "total_risk_exposure": 2289212.7643
+      },
+      {
+        "count": 587,
+        "score_band": "0.4-0.6",
+        "total_risk_exposure": 1107819.0635
+      },
+      {
+        "count": 277,
+        "score_band": "0.6-0.8",
+        "total_risk_exposure": 852138.5481
+      },
+      {
+        "count": 25,
+        "score_band": "0.8-1.0",
+        "total_risk_exposure": 50542.3011
+      }
+    ],
+    "score_distribution": [
+      {
+        "bin_high": 0.1,
+        "bin_low": 0.0,
+        "count": 0
+      },
+      {
+        "bin_high": 0.2,
+        "bin_low": 0.1,
+        "count": 220
+      },
+      {
+        "bin_high": 0.3,
+        "bin_low": 0.2,
+        "count": 848
+      },
+      {
+        "bin_high": 0.4,
+        "bin_low": 0.3,
+        "count": 543
+      },
+      {
+        "bin_high": 0.5,
+        "bin_low": 0.4,
+        "count": 347
+      },
+      {
+        "bin_high": 0.6,
+        "bin_low": 0.5,
+        "count": 240
+      },
+      {
+        "bin_high": 0.7,
+        "bin_low": 0.6,
+        "count": 162
+      },
+      {
+        "bin_high": 0.8,
+        "bin_low": 0.7,
+        "count": 115
+      },
+      {
+        "bin_high": 0.9,
+        "bin_low": 0.8,
+        "count": 25
+      },
+      {
+        "bin_high": 1.0,
+        "bin_low": 0.9,
+        "count": 0
+      }
+    ],
+    "threshold_sensitivity": [
+      {
+        "count_high_risk": 25,
+        "count_monitor": 775,
+        "count_normal": 1423,
+        "count_review": 277,
+        "delta": -0.05,
+        "high_risk_thresh": 0.8,
+        "monitor_thresh": 0.35,
+        "review_thresh": 0.6
+      },
+      {
+        "count_high_risk": 4,
+        "count_monitor": 673,
+        "count_normal": 1611,
+        "count_review": 212,
+        "delta": 0.0,
+        "high_risk_thresh": 0.85,
+        "monitor_thresh": 0.4,
+        "review_thresh": 0.65
+      },
+      {
+        "count_high_risk": 0,
+        "count_monitor": 576,
+        "count_normal": 1784,
+        "count_review": 140,
+        "delta": 0.05,
+        "high_risk_thresh": 0.9,
+        "monitor_thresh": 0.45,
+        "review_thresh": 0.7
+      }
+    ],
+    "top_risk_driver_frequency": [
+      {
+        "frequency": 2364,
+        "reason": "new_counterparty"
+      },
+      {
+        "frequency": 1635,
+        "reason": "high_wallet_velocity"
+      },
+      {
+        "frequency": 1182,
+        "reason": "imbalanced_flow"
+      },
+      {
+        "frequency": 642,
+        "reason": "risky_address_exposure"
+      },
+      {
+        "frequency": 264,
+        "reason": "high_counterparty_risk"
+      },
+      {
+        "frequency": 124,
+        "reason": "large_transfer"
+      }
+    ]
+  },
+  "verdicts": [
+    {
+      "calibration_status": "fail",
+      "explainability_status": "transparent",
+      "model_name": "champion_scorecard",
+      "model_type": "logistic_scorecard",
+      "primary_metric": 0.694804,
+      "primary_metric_name": "roc_auc",
+      "segment_status": "acceptable",
+      "stability_status": "stable",
+      "validation_verdict": "Monitor",
+      "verdict_reason": "Champion scorecard has acceptable discrimination (AUC=0.6948) but requires monitoring: calibration Brier-after=0.1846, 0 weak segment(s) detected."
+    },
+    {
+      "calibration_status": "fail",
+      "explainability_status": "opaque_importances",
+      "model_name": "challenger_gbm",
+      "model_type": "gradient_boosting",
+      "primary_metric": 0.69596,
+      "primary_metric_name": "roc_auc",
+      "segment_status": "not_computed",
+      "stability_status": "stable",
+      "validation_verdict": "Monitor",
+      "verdict_reason": "Challenger GBM has adequate discrimination (AUC=0.6960) but requires monitoring: Brier-after=0.1848, PSI=0.0301 (stable), reduced explainability."
+    },
+    {
+      "calibration_status": "not_calibrated",
+      "explainability_status": "transparent",
+      "model_name": "fraud_supervised",
+      "model_type": "logistic_balanced",
+      "primary_metric": 0.791187,
+      "primary_metric_name": "pr_auc",
+      "segment_status": "not_computed",
+      "stability_status": "not_computed",
+      "validation_verdict": "Pass",
+      "verdict_reason": "Fraud supervised model passes: PR-AUC=0.7912 (headline), fraud capture rate at stepup threshold=0.8077, ROC-AUC=0.9755."
+    },
+    {
+      "calibration_status": "not_applicable_unsupervised",
+      "explainability_status": "opaque",
+      "model_name": "fraud_anomaly",
+      "model_type": "isolation_forest",
+      "primary_metric": 0.926771,
+      "primary_metric_name": "sanity_roc_auc_vs_fraud_label",
+      "segment_status": "not_computed",
+      "stability_status": "not_computed",
+      "validation_verdict": "Pass",
+      "verdict_reason": "Fraud anomaly model (Isolation Forest) shows useful discrimination: sanity AUC=0.9268 vs fraud label; suitable as a complementary unsupervised signal alongside the supervised model."
+    },
+    {
+      "calibration_status": "not_applicable_scoring_system",
+      "explainability_status": "transparent_reason_codes",
+      "model_name": "stablecoin_risk_scoring",
+      "model_type": "rule_and_indicator_scoring",
+      "primary_metric": 0.871338,
+      "primary_metric_name": "discrimination_auc_vs_synthetic_label",
+      "segment_status": "not_computed",
+      "stability_status": "not_computed",
+      "validation_verdict": "Pass",
+      "verdict_reason": "Stablecoin AML-style risk indicator scoring system shows strong discrimination (AUC=0.8713) against synthetic risk label; action mix and concentration metrics are within expected ranges for a risk-tiering system."
+    }
+  ]
+}

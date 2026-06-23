@@ -1,0 +1,3 @@
+model,model_type,pr_auc,roc_auc,precision_at_stepup,recall_at_stepup,fraud_capture_rate,false_positive_rate,false_negative_rate,tp,fp,tn,fn,sanity_roc_auc_vs_fraud_label,note
+fraud_supervised,logistic_balanced,0.791187,0.975484,0.164062,0.807692,0.807692,0.017911,0.192308,42.0,214.0,11734.0,10.0,,
+fraud_anomaly,isolation_forest,,,,,,,,,,,,0.926771,Unsupervised model — sanity AUC measures discrimination vs fraud label; not used as primary fraud classifier.

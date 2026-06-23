@@ -1,0 +1,32 @@
+{
+  "note": "Simulated stress cases via PD/LGD/fraud multipliers; PD capped at 1.0.",
+  "scenarios": {
+    "base": {
+      "expected_credit_loss": 162330513.38,
+      "expected_fraud_loss": 901091.5,
+      "fraud_loss_multiplier": 1.0,
+      "lgd_multiplier": 1.0,
+      "pd_multiplier": 1.0,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 167578793.0
+    },
+    "moderate": {
+      "expected_credit_loss": 223204455.9,
+      "expected_fraud_loss": 1081309.8,
+      "fraud_loss_multiplier": 1.2,
+      "lgd_multiplier": 1.1,
+      "pd_multiplier": 1.25,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 228632953.82
+    },
+    "severe": {
+      "expected_credit_loss": 324643575.06,
+      "expected_fraud_loss": 1351637.24,
+      "fraud_loss_multiplier": 1.5,
+      "lgd_multiplier": 1.25,
+      "pd_multiplier": 1.6,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 330342400.42
+    }
+  }
+}

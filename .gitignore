@@ -13,7 +13,6 @@ env/
 node_modules/
 frontend/dist/
 frontend/.vite/
-frontend/public/data/
 
 # OS
 .DS_Store
@@ -34,3 +33,6 @@ data/raw/
 
 # Claude Code local config (not part of the project)
 .claude/
+
+# Local Netlify folder
+.netlify

@@ -1,0 +1,91 @@
+{
+  "doc_reference": {
+    "approve": 0.06,
+    "decline": 0.12
+  },
+  "note": "Credit-policy loss/growth tradeoff; fraud + stablecoin held fixed across credit cutoffs.",
+  "operating_point": {
+    "approve": 0.15,
+    "decline": 0.3
+  },
+  "policies": [
+    {
+      "approval_rate": 0.0001,
+      "approve_cutoff": 0.06,
+      "approved_exposure": 137800.0,
+      "decline_cutoff": 0.12,
+      "decline_rate": 0.8236,
+      "expected_credit_loss": 33.41,
+      "expected_fraud_loss": 901091.5,
+      "loss_rate": 0.000242,
+      "review_rate": 0.1763,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 5248313.03
+    },
+    {
+      "approval_rate": 0.0874,
+      "approve_cutoff": 0.1,
+      "approved_exposure": 71702925.0,
+      "decline_cutoff": 0.2,
+      "decline_rate": 0.6617,
+      "expected_credit_loss": 2112071.88,
+      "expected_fraud_loss": 901091.5,
+      "loss_rate": 0.029456,
+      "review_rate": 0.2509,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 7360351.5
+    },
+    {
+      "approval_rate": 0.2408,
+      "approve_cutoff": 0.15,
+      "approved_exposure": 211657250.0,
+      "decline_cutoff": 0.3,
+      "decline_rate": 0.3779,
+      "expected_credit_loss": 7819944.24,
+      "expected_fraud_loss": 901091.5,
+      "loss_rate": 0.036946,
+      "review_rate": 0.3812,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 13068223.86
+    },
+    {
+      "approval_rate": 0.3383,
+      "approve_cutoff": 0.2,
+      "approved_exposure": 301798875.0,
+      "decline_cutoff": 0.4,
+      "decline_rate": 0.1468,
+      "expected_credit_loss": 15272166.96,
+      "expected_fraud_loss": 901091.5,
+      "loss_rate": 0.050604,
+      "review_rate": 0.5149,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 20520446.58
+    },
+    {
+      "approval_rate": 0.4796,
+      "approve_cutoff": 0.25,
+      "approved_exposure": 433971275.0,
+      "decline_cutoff": 0.5,
+      "decline_rate": 0.0254,
+      "expected_credit_loss": 29830286.38,
+      "expected_fraud_loss": 901091.5,
+      "loss_rate": 0.068738,
+      "review_rate": 0.495,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 35078566.0
+    },
+    {
+      "approval_rate": 0.6221,
+      "approve_cutoff": 0.3,
+      "approved_exposure": 576016675.0,
+      "decline_cutoff": 0.6,
+      "decline_rate": 0.0012,
+      "expected_credit_loss": 50709852.67,
+      "expected_fraud_loss": 901091.5,
+      "loss_rate": 0.088035,
+      "review_rate": 0.3768,
+      "stablecoin_risk_exposure": 4347188.12,
+      "total_expected_loss": 55958132.29
+    }
+  ]
+}

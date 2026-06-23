@@ -1,0 +1,32 @@
+{
+  "approval_rate": 0.240846,
+  "average_PD": 0.256884,
+  "data_disclaimer": "Hybrid data: real LendingClub/Kaggle/FRED inputs plus clearly-labeled synthetic stablecoin and synthetic payment-context features. Estimates are modeled, not realized; default_flag is a default/severe-delinquency proxy.",
+  "decline_rate": 0.377934,
+  "highest_risk_segment": {
+    "dimension": "risk_grade",
+    "expected_loss_rate": 0.338487,
+    "segment": "E",
+    "total_expected_loss": 62642944.71415
+  },
+  "manual_review_volume": 250,
+  "model_verdict_summary": {
+    "by_model": {
+      "challenger_gbm": "Monitor",
+      "champion_scorecard": "Monitor",
+      "fraud_anomaly": "Pass",
+      "fraud_supervised": "Pass",
+      "stablecoin_risk_scoring": "Pass"
+    },
+    "counts": {
+      "Monitor": 2,
+      "Pass": 3
+    }
+  },
+  "review_rate": 0.38122,
+  "stablecoin_risk_exposure": 4347188.12,
+  "total_applicants": 69999,
+  "total_approved_exposure": 211657250.0,
+  "total_expected_credit_loss": 162330518.92,
+  "total_expected_fraud_loss": 901091.5
+}

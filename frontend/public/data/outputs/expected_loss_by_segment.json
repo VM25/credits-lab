@@ -1,0 +1,432 @@
+{
+  "assumptions_note": "LGD by grade and EAD=loan_amount are labeled assumptions (doc 05).",
+  "credit_segments": {
+    "application_vintage": [
+      {
+        "account_count": 19,
+        "application_vintage": 2007,
+        "average_expected_loss": 958.721716,
+        "expected_loss_rate": 0.108978,
+        "exposure": 167150.0,
+        "total_expected_loss": 18215.712608
+      },
+      {
+        "account_count": 92,
+        "application_vintage": 2008,
+        "average_expected_loss": 718.196125,
+        "expected_loss_rate": 0.078763,
+        "exposure": 838900.0,
+        "total_expected_loss": 66074.04354
+      },
+      {
+        "account_count": 248,
+        "application_vintage": 2009,
+        "average_expected_loss": 995.906852,
+        "expected_loss_rate": 0.09488,
+        "exposure": 2603125.0,
+        "total_expected_loss": 246984.899306
+      },
+      {
+        "account_count": 604,
+        "application_vintage": 2010,
+        "average_expected_loss": 1023.146866,
+        "expected_loss_rate": 0.093197,
+        "exposure": 6630875.0,
+        "total_expected_loss": 617980.707111
+      },
+      {
+        "account_count": 1112,
+        "application_vintage": 2011,
+        "average_expected_loss": 1387.244327,
+        "expected_loss_rate": 0.116386,
+        "exposure": 13254250.0,
+        "total_expected_loss": 1542615.691145
+      },
+      {
+        "account_count": 2731,
+        "application_vintage": 2012,
+        "average_expected_loss": 1791.240022,
+        "expected_loss_rate": 0.136437,
+        "exposure": 35854525.0,
+        "total_expected_loss": 4891876.498771
+      },
+      {
+        "account_count": 6900,
+        "application_vintage": 2013,
+        "average_expected_loss": 2172.272158,
+        "expected_loss_rate": 0.147985,
+        "exposure": 101285400.0,
+        "total_expected_loss": 14988677.887012
+      },
+      {
+        "account_count": 11437,
+        "application_vintage": 2014,
+        "average_expected_loss": 2289.463088,
+        "expected_loss_rate": 0.156866,
+        "exposure": 166923750.0,
+        "total_expected_loss": 26184589.340735
+      },
+      {
+        "account_count": 19292,
+        "application_vintage": 2015,
+        "average_expected_loss": 2242.066465,
+        "expected_loss_rate": 0.153541,
+        "exposure": 281709500.0,
+        "total_expected_loss": 43253946.236906
+      },
+      {
+        "account_count": 15235,
+        "application_vintage": 2016,
+        "average_expected_loss": 2432.976436,
+        "expected_loss_rate": 0.168337,
+        "exposure": 220192000.0,
+        "total_expected_loss": 37066396.009371
+      },
+      {
+        "account_count": 9077,
+        "application_vintage": 2017,
+        "average_expected_loss": 2708.167181,
+        "expected_loss_rate": 0.185692,
+        "exposure": 132380875.0,
+        "total_expected_loss": 24582033.504015
+      },
+      {
+        "account_count": 3252,
+        "application_vintage": 2018,
+        "average_expected_loss": 2727.89926,
+        "expected_loss_rate": 0.179734,
+        "exposure": 49357075.0,
+        "total_expected_loss": 8871128.393871
+      }
+    ],
+    "credit_grade": [
+      {
+        "account_count": 11912,
+        "average_expected_loss": 542.816849,
+        "credit_grade": "A",
+        "expected_loss_rate": 0.039112,
+        "exposure": 165320725.0,
+        "total_expected_loss": 6466034.306895
+      },
+      {
+        "account_count": 20511,
+        "average_expected_loss": 1268.979092,
+        "credit_grade": "B",
+        "expected_loss_rate": 0.095565,
+        "exposure": 272358825.0,
+        "total_expected_loss": 26028030.164054
+      },
+      {
+        "account_count": 20128,
+        "average_expected_loss": 2331.111645,
+        "credit_grade": "C",
+        "expected_loss_rate": 0.164264,
+        "exposure": 285640950.0,
+        "total_expected_loss": 46920615.199156
+      },
+      {
+        "account_count": 10455,
+        "average_expected_loss": 3769.217302,
+        "credit_grade": "D",
+        "expected_loss_rate": 0.243807,
+        "exposure": 161632750.0,
+        "total_expected_loss": 39407166.889702
+      },
+      {
+        "account_count": 4840,
+        "average_expected_loss": 5604.449191,
+        "credit_grade": "E",
+        "expected_loss_rate": 0.320064,
+        "exposure": 84750250.0,
+        "total_expected_loss": 27125534.085177
+      },
+      {
+        "account_count": 1661,
+        "average_expected_loss": 7391.803935,
+        "credit_grade": "F",
+        "expected_loss_rate": 0.385448,
+        "exposure": 31853300.0,
+        "total_expected_loss": 12277786.336043
+      },
+      {
+        "account_count": 492,
+        "average_expected_loss": 8344.211267,
+        "credit_grade": "G",
+        "expected_loss_rate": 0.425839,
+        "exposure": 9640625.0,
+        "total_expected_loss": 4105351.943364
+      }
+    ],
+    "debt_to_income_band": [
+      {
+        "account_count": 29135,
+        "average_expected_loss": 2095.137042,
+        "debt_to_income_band": "10-20",
+        "expected_loss_rate": 0.143529,
+        "exposure": 425291300.0,
+        "total_expected_loss": 61041817.723382
+      },
+      {
+        "account_count": 21352,
+        "average_expected_loss": 2752.208425,
+        "debt_to_income_band": "20-30",
+        "expected_loss_rate": 0.185465,
+        "exposure": 316853325.0,
+        "total_expected_loss": 58765154.299133
+      },
+      {
+        "account_count": 6694,
+        "average_expected_loss": 3528.333235,
+        "debt_to_income_band": "30+",
+        "expected_loss_rate": 0.244679,
+        "exposure": 96529100.0,
+        "total_expected_loss": 23618662.677354
+      },
+      {
+        "account_count": 12794,
+        "average_expected_loss": 1472.204148,
+        "debt_to_income_band": "<10",
+        "expected_loss_rate": 0.109394,
+        "exposure": 172179975.0,
+        "total_expected_loss": 18835379.867459
+      },
+      {
+        "account_count": 24,
+        "average_expected_loss": 2896.014878,
+        "debt_to_income_band": "unknown",
+        "expected_loss_rate": 0.202209,
+        "exposure": 343725.0,
+        "total_expected_loss": 69504.357063
+      }
+    ],
+    "decision": [
+      {
+        "account_count": 16859,
+        "average_expected_loss": 463.843896,
+        "decision": "approve",
+        "expected_loss_rate": 0.036946,
+        "exposure": 211657250.0,
+        "total_expected_loss": 7819944.242136
+      },
+      {
+        "account_count": 26455,
+        "average_expected_loss": 4219.265404,
+        "decision": "decline",
+        "expected_loss_rate": 0.256493,
+        "exposure": 435180750.0,
+        "total_expected_loss": 111620666.24965
+      },
+      {
+        "account_count": 26685,
+        "average_expected_loss": 1607.26657,
+        "decision": "review",
+        "expected_loss_rate": 0.117713,
+        "exposure": 364359425.0,
+        "total_expected_loss": 42889908.432605
+      }
+    ],
+    "income_band": [
+      {
+        "account_count": 8930,
+        "average_expected_loss": 2675.02067,
+        "expected_loss_rate": 0.121753,
+        "exposure": 196199350.0,
+        "income_band": "120k+",
+        "total_expected_loss": 23887934.587526
+      },
+      {
+        "account_count": 30942,
+        "average_expected_loss": 2244.067654,
+        "expected_loss_rate": 0.176555,
+        "exposure": 393282600.0,
+        "income_band": "40-75k",
+        "total_expected_loss": 69435941.335784
+      },
+      {
+        "account_count": 19021,
+        "average_expected_loss": 2744.510716,
+        "expected_loss_rate": 0.15714,
+        "exposure": 332210025.0,
+        "income_band": "75-120k",
+        "total_expected_loss": 52203338.331983
+      },
+      {
+        "account_count": 11106,
+        "average_expected_loss": 1512.993397,
+        "expected_loss_rate": 0.187735,
+        "exposure": 89505450.0,
+        "income_band": "<40k",
+        "total_expected_loss": 16803304.669098
+      }
+    ],
+    "loan_purpose": [
+      {
+        "account_count": 790,
+        "average_expected_loss": 1221.993529,
+        "expected_loss_rate": 0.133598,
+        "exposure": 7225975.0,
+        "loan_purpose": "car",
+        "total_expected_loss": 965374.88801
+      },
+      {
+        "account_count": 15423,
+        "average_expected_loss": 2012.049946,
+        "expected_loss_rate": 0.135834,
+        "exposure": 228453475.0,
+        "loan_purpose": "credit_card",
+        "total_expected_loss": 31031846.311544
+      },
+      {
+        "account_count": 40563,
+        "average_expected_loss": 2592.855528,
+        "expected_loss_rate": 0.170033,
+        "exposure": 618548700.0,
+        "loan_purpose": "debt_consolidation",
+        "total_expected_loss": 105173998.800643
+      },
+      {
+        "account_count": 23,
+        "average_expected_loss": 373.796447,
+        "expected_loss_rate": 0.054891,
+        "exposure": 156625.0,
+        "loan_purpose": "educational",
+        "total_expected_loss": 8597.318274
+      },
+      {
+        "account_count": 4495,
+        "average_expected_loss": 2018.007088,
+        "expected_loss_rate": 0.142099,
+        "exposure": 63835150.0,
+        "loan_purpose": "home_improvement",
+        "total_expected_loss": 9070941.862263
+      },
+      {
+        "account_count": 340,
+        "average_expected_loss": 2893.962918,
+        "expected_loss_rate": 0.183015,
+        "exposure": 5376325.0,
+        "loan_purpose": "house",
+        "total_expected_loss": 983947.392199
+      },
+      {
+        "account_count": 1516,
+        "average_expected_loss": 1741.731566,
+        "expected_loss_rate": 0.144428,
+        "exposure": 18282175.0,
+        "loan_purpose": "major_purchase",
+        "total_expected_loss": 2640465.053982
+      },
+      {
+        "account_count": 833,
+        "average_expected_loss": 1521.114156,
+        "expected_loss_rate": 0.166774,
+        "exposure": 7597650.0,
+        "loan_purpose": "medical",
+        "total_expected_loss": 1267088.092151
+      },
+      {
+        "account_count": 502,
+        "average_expected_loss": 1424.750025,
+        "expected_loss_rate": 0.182093,
+        "exposure": 3927800.0,
+        "loan_purpose": "moving",
+        "total_expected_loss": 715224.512607
+      },
+      {
+        "account_count": 4055,
+        "average_expected_loss": 1785.680713,
+        "expected_loss_rate": 0.179935,
+        "exposure": 40242025.0,
+        "loan_purpose": "other",
+        "total_expected_loss": 7240935.2898
+      },
+      {
+        "account_count": 46,
+        "average_expected_loss": 1803.760624,
+        "expected_loss_rate": 0.195656,
+        "exposure": 424075.0,
+        "loan_purpose": "renewable_energy",
+        "total_expected_loss": 82972.988686
+      },
+      {
+        "account_count": 821,
+        "average_expected_loss": 3134.44298,
+        "expected_loss_rate": 0.194983,
+        "exposure": 13197975.0,
+        "loan_purpose": "small_business",
+        "total_expected_loss": 2573377.68678
+      },
+      {
+        "account_count": 470,
+        "average_expected_loss": 824.940031,
+        "expected_loss_rate": 0.143182,
+        "exposure": 2707900.0,
+        "loan_purpose": "vacation",
+        "total_expected_loss": 387721.814657
+      },
+      {
+        "account_count": 122,
+        "average_expected_loss": 1541.204203,
+        "expected_loss_rate": 0.153922,
+        "exposure": 1221575.0,
+        "loan_purpose": "wedding",
+        "total_expected_loss": 188026.912795
+      }
+    ],
+    "risk_grade": [
+      {
+        "account_count": 6121,
+        "average_expected_loss": 345.053403,
+        "expected_loss_rate": 0.029456,
+        "exposure": 71702925.0,
+        "risk_grade": "A",
+        "total_expected_loss": 2112071.87696
+      },
+      {
+        "account_count": 14032,
+        "average_expected_loss": 576.804877,
+        "expected_loss_rate": 0.044199,
+        "exposure": 183118975.0,
+        "risk_grade": "B",
+        "total_expected_loss": 8093726.033486
+      },
+      {
+        "account_count": 23349,
+        "average_expected_loss": 1731.346434,
+        "expected_loss_rate": 0.126056,
+        "exposure": 320692800.0,
+        "risk_grade": "C",
+        "total_expected_loss": 40425207.894081
+      },
+      {
+        "account_count": 16221,
+        "average_expected_loss": 3024.262894,
+        "expected_loss_rate": 0.195744,
+        "exposure": 250615325.0,
+        "risk_grade": "D",
+        "total_expected_loss": 49056568.405714
+      },
+      {
+        "account_count": 10276,
+        "average_expected_loss": 6096.043666,
+        "expected_loss_rate": 0.338487,
+        "exposure": 185067400.0,
+        "risk_grade": "E",
+        "total_expected_loss": 62642944.71415
+      }
+    ]
+  },
+  "fraud_loss_by_action": {
+    "approve": 372926.04,
+    "block": 152116.55,
+    "review": 143040.8,
+    "step_up": 233008.11
+  },
+  "portfolio_expected_credit_loss": 162330518.92,
+  "stablecoin_exposure_by_action": {
+    "high_risk": 27512.03,
+    "monitor": 1415564.57,
+    "normal": 2336688.21,
+    "review": 567423.32
+  }
+}

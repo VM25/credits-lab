@@ -1,0 +1,204 @@
+{
+  "action_mix": {
+    "approve": 76555,
+    "block": 637,
+    "review": 771,
+    "step_up": 2037
+  },
+  "composite_weights": {
+    "anomaly_score": 0.1,
+    "fraud_probability": 0.8,
+    "rule_score": 0.1
+  },
+  "expected_fraud_loss_avoided": 3436.4523,
+  "expected_fraud_loss_by_action": {
+    "approve": 372926.0373,
+    "block": 152116.5452,
+    "review": 143040.804,
+    "step_up": 233008.1101
+  },
+  "false_negative_rate": 0.192308,
+  "false_positive_rate": 0.009876,
+  "fraud_capture_rate": 0.807692,
+  "fraud_score_distribution": {
+    "bins": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "counts": [
+      62745,
+      9850,
+      3106,
+      1447,
+      917,
+      527,
+      419,
+      352,
+      510,
+      127
+    ]
+  },
+  "manual_review_capacity": 250,
+  "manual_review_volume": 250,
+  "model_note": "Supervised: LogisticRegression(class_weight='balanced', max_iter=1000). Anomaly: IsolationForest(contamination='auto'). Composite = 0.80*fraud_probability + 0.10*anomaly_score + 0.10*rule_score. High weight on supervised probability ensures actual frauds (prob~1.0) breach the 0.80 review/block threshold; anomaly and rule scores provide interpretable secondary signal without degrading the primary discriminative power.",
+  "note": "Fraud labels are heavily imbalanced (~0.6% positive rate). Accuracy is NOT used as a headline metric. PR-AUC (precision-recall area) is the primary performance indicator.",
+  "pr_auc": 0.659176,
+  "precision": 0.2625,
+  "recall": 0.807692,
+  "roc_auc": 0.971088,
+  "threshold_tradeoff": [
+    {
+      "expected_fraud_loss": 83613.322,
+      "false_positives": 4894,
+      "fraud_captured": 51,
+      "review_volume": 4945,
+      "threshold": 0.05
+    },
+    {
+      "expected_fraud_loss": 76640.8132,
+      "false_positives": 1964,
+      "fraud_captured": 49,
+      "review_volume": 2013,
+      "threshold": 0.1
+    },
+    {
+      "expected_fraud_loss": 68033.0979,
+      "false_positives": 1251,
+      "fraud_captured": 47,
+      "review_volume": 1298,
+      "threshold": 0.15
+    },
+    {
+      "expected_fraud_loss": 61068.7519,
+      "false_positives": 882,
+      "fraud_captured": 47,
+      "review_volume": 929,
+      "threshold": 0.2
+    },
+    {
+      "expected_fraud_loss": 53353.4443,
+      "false_positives": 668,
+      "fraud_captured": 46,
+      "review_volume": 714,
+      "threshold": 0.25
+    },
+    {
+      "expected_fraud_loss": 47997.7697,
+      "false_positives": 505,
+      "fraud_captured": 46,
+      "review_volume": 551,
+      "threshold": 0.3
+    },
+    {
+      "expected_fraud_loss": 42849.0062,
+      "false_positives": 406,
+      "fraud_captured": 45,
+      "review_volume": 451,
+      "threshold": 0.35
+    },
+    {
+      "expected_fraud_loss": 38527.8708,
+      "false_positives": 317,
+      "fraud_captured": 44,
+      "review_volume": 361,
+      "threshold": 0.4
+    },
+    {
+      "expected_fraud_loss": 32631.9156,
+      "false_positives": 255,
+      "fraud_captured": 43,
+      "review_volume": 298,
+      "threshold": 0.45
+    },
+    {
+      "expected_fraud_loss": 28979.8934,
+      "false_positives": 197,
+      "fraud_captured": 42,
+      "review_volume": 239,
+      "threshold": 0.5
+    },
+    {
+      "expected_fraud_loss": 24436.7351,
+      "false_positives": 154,
+      "fraud_captured": 42,
+      "review_volume": 196,
+      "threshold": 0.55
+    },
+    {
+      "expected_fraud_loss": 21362.0766,
+      "false_positives": 118,
+      "fraud_captured": 42,
+      "review_volume": 160,
+      "threshold": 0.6
+    },
+    {
+      "expected_fraud_loss": 18783.6244,
+      "false_positives": 86,
+      "fraud_captured": 42,
+      "review_volume": 128,
+      "threshold": 0.65
+    },
+    {
+      "expected_fraud_loss": 16456.2792,
+      "false_positives": 65,
+      "fraud_captured": 42,
+      "review_volume": 107,
+      "threshold": 0.7
+    },
+    {
+      "expected_fraud_loss": 13189.7641,
+      "false_positives": 43,
+      "fraud_captured": 42,
+      "review_volume": 85,
+      "threshold": 0.75
+    },
+    {
+      "expected_fraud_loss": 11105.6453,
+      "false_positives": 26,
+      "fraud_captured": 40,
+      "review_volume": 66,
+      "threshold": 0.8
+    },
+    {
+      "expected_fraud_loss": 6517.5618,
+      "false_positives": 7,
+      "fraud_captured": 33,
+      "review_volume": 40,
+      "threshold": 0.85
+    },
+    {
+      "expected_fraud_loss": 4736.7152,
+      "false_positives": 1,
+      "fraud_captured": 1,
+      "review_volume": 2,
+      "threshold": 0.9
+    },
+    {
+      "expected_fraud_loss": 0.0,
+      "false_positives": 0,
+      "fraud_captured": 0,
+      "review_volume": 0,
+      "threshold": 0.95
+    }
+  ],
+  "top_fraud_drivers": {
+    "HIGH_AMOUNT": 178,
+    "HIGH_ANOMALY_SCORE": 89,
+    "HIGH_FRAUD_SCORE": 1645,
+    "HIGH_RISK_MERCHANT": 349,
+    "HIGH_VELOCITY": 256,
+    "NEW_DEVICE": 2253,
+    "NEW_LOCATION": 926,
+    "SHORT_ACCOUNT_AGE": 41,
+    "UNUSUAL_AMOUNT": 479
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "chart_data_embedding_map": {
+    "calibration_curve": "embedded in model_validation_summary.json (no standalone calibration_curve.json)",
+    "decile_default_table": "embedded in model_validation_summary.json and credit_model_validation.csv (no standalone decile_default_table.csv)",
+    "note": "Per the output contract, chart-ready structure lives inside the required JSON files; no extra output files are created."
+  },
+  "data_sources": {
+    "card_payments": "Kaggle credit-card fraud (mlg-ulb/creditcardfraud) \u2014 real labels/amount/Time/V1..V28; deterministically downsampled (all fraud kept).",
+    "credit": "LendingClub accepted loans (public, Kaggle wordsforthewise/lending-club), seeded stratified sample.",
+    "credit_rejects": "LendingClub rejected applicants (real) + clearly-labeled synthetic rejects for reject-inference/policy context only (never used for supervised PD training).",
+    "macro": "FRED public series (UNRATE, FEDFUNDS, CPIAUCSL->YoY inflation, DRCCLACBS, CORCCACBS); pulled 2026-06-22. Used for stress overlays only.",
+    "stablecoin": "Fully synthetic, seeded transaction sample (secondary module)."
+  },
+  "default_flag_definition": "Default / SEVERE-DELINQUENCY PROXY (not pure charge-off): 1 = Charged Off / Default / Late (31-120 days) / 'Does not meet the credit policy. Status:Charged Off'; 0 = Fully Paid; in-progress/ambiguous statuses dropped.",
+  "feature_summary": "Application-time credit features (leakage-guarded; post-origination fields excluded) + engineered ratios/bands; payment V1..V28 + velocity/zscore/flags (fraud_flag & chargeback_loss excluded from features).",
+  "known_limitations": [
+    "default_flag is a default/severe-delinquency proxy, not pure charge-off.",
+    "Credit champion discrimination is modest (ROC-AUC ~0.69); verdict Monitor.",
+    "amount_zscore_by_account uses each account's full-window statistics (mild temporal lookahead in one engineered fraud feature).",
+    "Card contextual features and the stablecoin domain are synthetic; stablecoin label is synthetic.",
+    "Macro variables are used for stress overlays only; no individual-default causality is claimed.",
+    "Loss figures are assumption-driven estimates, not realized losses.",
+    "This is a research/portfolio build, not a deployed system; the stablecoin module uses AML-style risk indicators only."
+  ],
+  "loss_assumptions": {
+    "ead": "Installment EAD = loan_amount; revolving EAD = limit * utilization.",
+    "fraud_loss_severity": 0.9,
+    "lgd_by_risk": {
+      "high": 0.75,
+      "low": 0.35,
+      "standard": 0.55
+    },
+    "lgd_default": 0.55,
+    "stablecoin_exposure": "risk_exposure = stablecoin_risk_score * amount_usd (exposure proxy, not realized loss).",
+    "utilization_assumption": 0.65
+  },
+  "model_list": {
+    "fraud_anomaly": "Isolation Forest (normalized anomaly score).",
+    "fraud_supervised": "Logistic regression (class-weight balanced) on V1..V28 + engineered features.",
+    "stablecoin_scoring": "Transparent composite of AML-style risk indicators (not a trained classifier; synthetic label used only for validation).",
+    "underwriting_challenger": "Gradient boosting (sklearn), isotonic-calibrated; compared but not selected (explainability).",
+    "underwriting_champion": "Logistic-regression scorecard (StandardScaler + LogisticRegression), isotonic-calibrated PD."
+  },
+  "operating_point": {
+    "decision_thresholds": {
+      "approve": 0.15,
+      "decline": 0.3
+    },
+    "doc_reference_thresholds": {
+      "approve": 0.06,
+      "decline": 0.12
+    },
+    "rationale": "Validation-derived for the high-base-rate accepted book (model rank-orders/calibrates well); doc reference cutoffs (approve<0.06/decline>=0.12) retained for the policy simulator.",
+    "risk_grade_bands": "Rescaled from doc starting bands to spread across the population PD distribution."
+  },
+  "split_method": "Time-aware 70/15/15 by date (credit issue_d; payments Time). Thresholds never tuned on the test split.",
+  "stress_assumptions": {
+    "base": {
+      "fraud_mult": 1.0,
+      "lgd_mult": 1.0,
+      "pd_mult": 1.0
+    },
+    "moderate": {
+      "fraud_mult": 1.2,
+      "lgd_mult": 1.1,
+      "pd_mult": 1.25
+    },
+    "severe": {
+      "fraud_mult": 1.5,
+      "lgd_mult": 1.25,
+      "pd_mult": 1.6
+    }
+  },
+  "synthetic_data_disclosure": {
+    "fully_synthetic": [
+      "stablecoin transactions",
+      "synthetic rejected applicants"
+    ],
+    "statement": "Synthetic data and engineered features are clearly labeled and never presented as observed history.",
+    "synthetic_features_on_real_records": [
+      "card payments: merchant_category/merchant_risk_band/location_proxy/device_proxy/account_id/account_age_days and 24h velocity are synthetic context attached to REAL fraud labels + amount + PCA features"
+    ]
+  },
+  "validation_methods": "ROC-AUC, PR-AUC (fraud headline), Brier, KS, calibration curve, decile default table, PSI/drift, segment performance, champion-vs-challenger, Pass/Monitor/Fail verdicts. Accuracy is not used as a headline metric for imbalanced fraud."
+}
