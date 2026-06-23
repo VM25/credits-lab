@@ -8,7 +8,7 @@
     "card_payments": "Kaggle credit-card fraud (mlg-ulb/creditcardfraud) \u2014 real labels/amount/Time/V1..V28; deterministically downsampled (all fraud kept).",
     "credit": "LendingClub accepted loans (public, Kaggle wordsforthewise/lending-club), seeded stratified sample.",
     "credit_rejects": "LendingClub rejected applicants (real) + clearly-labeled synthetic rejects for reject-inference/policy context only (never used for supervised PD training).",
-    "macro": "FRED public series (UNRATE, FEDFUNDS, CPIAUCSL->YoY inflation, DRCCLACBS, CORCCACBS); pulled 2026-06-21. Used for stress overlays only.",
+    "macro": "FRED public series (UNRATE, FEDFUNDS, CPIAUCSL->YoY inflation, DRCCLACBS, CORCCACBS); pulled 2026-06-22. Used for stress overlays only.",
     "stablecoin": "Fully synthetic, seeded transaction sample (secondary module)."
   },
   "default_flag_definition": "Default / SEVERE-DELINQUENCY PROXY (not pure charge-off): 1 = Charged Off / Default / Late (31-120 days) / 'Does not meet the credit policy. Status:Charged Off'; 0 = Fully Paid; in-progress/ambiguous statuses dropped.",
