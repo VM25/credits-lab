@@ -1,5 +1,6 @@
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, MetricRow } from "../components/ui";
+import { IntroBlock, Term, Callout } from "../components/guide";
 import { BarFlat } from "../components/charts";
 import { money, pct, num, TOK, stateColor } from "../lib/format";
 
@@ -17,9 +18,14 @@ export function ExpectedLoss({ b }: { b: Bundle }) {
   return (
     <Section id="expected-loss" label="Expected loss engine" title="Risk scores → financial loss estimates"
       note="Assumption-driven estimates (LGD/EAD/severity labeled), not realized losses.">
+      <IntroBlock
+        what="Converts risk scores into money at risk: Expected Loss = PD × LGD × EAD, aggregated by grade and decision, then re-run under stress."
+        why="It bridges model output and business decisions - the same PD means very different exposure depending on loan size and loss severity."
+        look="Rates and rankings over raw dollars. All dollar figures are assumption-driven (LGD/EAD are assumptions), not observed losses."
+      />
       <Panel className="mb-3">
         <div className="px-4 py-3 num text-[15px] text-ink">
-          Expected Loss = PD × LGD × EAD
+          Expected Loss = <Term k="PD">PD</Term> × <Term k="LGD">LGD</Term> × <Term k="EAD">EAD</Term>
           <span className="ml-3 text-[11px] text-ink-soft">
             LGD {pct(a.lgd_by_risk?.low, 0)}/{pct(a.lgd_by_risk?.standard, 0)}/{pct(a.lgd_by_risk?.high, 0)} by grade · utilization {pct(a.utilization, 0)} · fraud severity {pct(a.fraud_loss_severity, 0)}
         </span>
@@ -47,7 +53,11 @@ export function ExpectedLoss({ b }: { b: Bundle }) {
           <div className="px-3 py-3"><BarFlat data={stressBars} x="name" y="value" money height={200} colorFor={(r) => r.name === "severe" ? TOK.fail : r.name === "moderate" ? TOK.review : TOK.accent} /></div>
         </Panel>
       </div>
-      <p className="mt-2 num text-[11px] text-ink-soft">{a.note}</p>
+      <div className="mt-3">
+        <Callout label="caveat">
+          Expected-loss dollar figures are assumption-driven estimates built on public LendingClub benchmark data, not observed losses from an active credit book. LGD, EAD, and stress multipliers are labeled assumptions.
+        </Callout>
+      </div>
     </Section>
   );
 }

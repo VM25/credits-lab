@@ -1,17 +1,17 @@
 // Display-only formatting. Never alters underlying values.
 
 export const pct = (x: number | null | undefined, dp = 1): string =>
-  x == null || Number.isNaN(x) ? "—" : `${(x * 100).toFixed(dp)}%`;
+  x == null || Number.isNaN(x) ? "-" : `${(x * 100).toFixed(dp)}%`;
 
 export const num = (x: number | null | undefined, dp = 2): string =>
-  x == null || Number.isNaN(x) ? "—" : x.toFixed(dp);
+  x == null || Number.isNaN(x) ? "-" : x.toFixed(dp);
 
 export const int = (x: number | null | undefined): string =>
-  x == null || Number.isNaN(x) ? "—" : Math.round(x).toLocaleString("en-US");
+  x == null || Number.isNaN(x) ? "-" : Math.round(x).toLocaleString("en-US");
 
 // Compact USD, e.g. $162.3M / $901.1K.
 export const money = (x: number | null | undefined): string => {
-  if (x == null || Number.isNaN(x)) return "—";
+  if (x == null || Number.isNaN(x)) return "-";
   const a = Math.abs(x);
   if (a >= 1e9) return `$${(x / 1e9).toFixed(2)}B`;
   if (a >= 1e6) return `$${(x / 1e6).toFixed(1)}M`;
@@ -21,7 +21,7 @@ export const money = (x: number | null | undefined): string => {
 
 export const moneyFull = (x: number | null | undefined): string =>
   x == null || Number.isNaN(x)
-    ? "—"
+    ? "-"
     : x.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 // Token hexes for chart libraries (mirror of theme.css :root).

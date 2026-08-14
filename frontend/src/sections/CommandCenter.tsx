@@ -1,5 +1,6 @@
 import type { Bundle } from "../lib/load";
 import { Section, MetricRow, Panel, PanelHead, Chip } from "../components/ui";
+import { IntroBlock, Term } from "../components/guide";
 import { pct, money, num } from "../lib/format";
 
 export function CommandCenter({ b }: { b: Bundle }) {
@@ -9,13 +10,20 @@ export function CommandCenter({ b }: { b: Bundle }) {
   return (
     <Section id="command-center" label="Risk command center" title="Portfolio-level risk state"
       note="Every figure traces to data/outputs. Modeled estimates, not realized losses.">
+      <IntroBlock
+        what="The portfolio snapshot: decision mix, loss exposure, review burden, and model status in one place."
+        why="It shows the state of the whole book before you drill into any single applicant or transaction."
+        look="Approval mix vs. loss exposure, and the model verdict panel (the credit model is on Monitor, not Pass)."
+      />
+      <div className="reg mb-1 text-[10px] text-ink-soft">credit decision mix</div>
       <MetricRow items={[
         { label: "approval rate", value: pct(c.approval_rate) },
         { label: "review rate", value: pct(c.review_rate) },
         { label: "decline rate", value: pct(c.decline_rate) },
         { label: "average PD", value: pct(c.average_PD) },
       ]} />
-      <div className="mt-2">
+      <div className="reg mb-1 mt-3 text-[10px] text-ink-soft">loss exposure (modeled)</div>
+      <div>
         <MetricRow items={[
           { label: "approved exposure", value: money(c.total_approved_exposure) },
           { label: "expected credit loss", value: money(c.total_expected_credit_loss) },

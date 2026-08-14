@@ -1,5 +1,6 @@
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, MetricRow, Chip } from "../components/ui";
+import { IntroBlock, Callout } from "../components/guide";
 import { BarFlat } from "../components/charts";
 import { money, num, stateColor } from "../lib/format";
 
@@ -13,8 +14,17 @@ export function StablecoinMonitor({ b }: { b: Bundle }) {
   const lb: any[] = s.wallet_risk_leaderboard ?? [];
 
   return (
-    <Section id="stablecoin" label="Stablecoin risk monitor" title="Wallet-risk scoring with AML-style risk indicators"
+    <Section id="stablecoin" label="Stablecoin payments-risk extension" title="Wallet-risk scoring with AML-style risk indicators"
       note={s.data_note || "Synthetic stablecoin transaction sample. AML-style risk indicators only."}>
+      <IntroBlock
+        what="A secondary module that scores stablecoin wallets on AML-style risk indicators (counterparty risk, velocity, risky-address exposure) and tiers them normal / monitor / review / high-risk."
+        why="It shows modern payments-risk thinking without turning the project into a crypto product - the core story stays credit and card fraud."
+        look="This is an extension, not the main system. Treat it as a demonstration of transaction-monitoring logic."
+      />
+      <Callout label="synthetic + scope">
+        Stablecoin data is <b>synthetic</b> and used only to demonstrate payments-risk monitoring logic. These are AML-style risk indicators only, making no regulatory-compliance claim, and there is no crypto trading, DeFi, yield, or token-price modeling here.
+      </Callout>
+      <div className="mt-3" />
       <MetricRow items={[
         { label: "transactions", value: num(s.row_count_total, 0) },
         { label: "high-risk wallets", value: num(s.high_risk_wallet_count, 0) },

@@ -1,6 +1,7 @@
 import type { Bundle } from "../lib/load";
 import { asVerdictList } from "../lib/load";
 import { Section, Panel, PanelHead, Chip } from "../components/ui";
+import { IntroBlock } from "../components/guide";
 import { LineFlat } from "../components/charts";
 import { pct, num, TOK } from "../lib/format";
 
@@ -27,6 +28,11 @@ export function ModelValidation({ b }: { b: Bundle }) {
     <Section id="validation" label="Model risk & validation" title="Can the models be trusted for decisions?"
       note="Calibration, drift (PSI), discrimination, segment behavior, and champion-vs-challenger. Verdicts weigh calibration and explainability, not AUC alone.">
 
+      <IntroBlock
+        what="Asks whether each model can be trusted for decisions - checking discrimination, calibration, drift, segment behavior, explainability, and threshold usefulness."
+        why="A model can look strong in-sample and still be unsafe. Validation is a core module here, not an appendix, and it decides which model is deployed."
+        look="The verdict panel: both underwriting models are Monitor (usable, modest discrimination); the fraud model and stablecoin scorer are Pass. Calibration and PD-decile tables show predicted vs. actual."
+      />
       <Panel>
         <PanelHead left="Model verdicts" right="Pass / Monitor / Fail" />
         <div className="divide-y divide-line">

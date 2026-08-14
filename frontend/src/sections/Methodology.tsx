@@ -1,5 +1,6 @@
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, Chip } from "../components/ui";
+import { IntroBlock } from "../components/guide";
 
 function KV({ obj }: { obj: Record<string, any> }) {
   return (
@@ -21,6 +22,11 @@ export function Methodology({ b }: { b: Bundle }) {
   return (
     <Section id="methodology" label="Evidence & methodology" title="Data, assumptions, validation, limitations"
       note="Full disclosure. Real data labeled real; synthetic data and engineered features labeled synthetic.">
+      <IntroBlock
+        what="The receipts: data sources, the default-flag definition, models, assumptions, validation methods, known limitations, and the data-quality/leakage gates."
+        why="Credibility comes from disclosure. What is real (LendingClub, Kaggle, FRED), what is synthetic (stablecoin + card context), and what is assumed (LGD/EAD/stress) is stated plainly."
+        look="The known-limitations panel and the data-quality report - including the leakage and schema gates that must pass before any output is written."
+      />
       <div className="grid gap-2 lg:grid-cols-2">
         <Panel><PanelHead left="Data sources" /><KV obj={m.data_sources} /></Panel>
         <Panel><PanelHead left="Synthetic data disclosure" /><KV obj={m.synthetic_data_disclosure} /></Panel>
@@ -56,7 +62,7 @@ export function Methodology({ b }: { b: Bundle }) {
               <div className="num px-3 py-1.5 text-[11px] text-ink">{r.dataset_name}</div>
               <div className="num px-3 py-1.5 text-[11px] text-ink">{Number(r.row_count).toLocaleString()}</div>
               <div className="num px-3 py-1.5 text-[11px] text-ink">{r.missing_value_count}</div>
-              <div className="num px-3 py-1.5 text-[11px] text-ink">{r.target_rate === "" || r.target_rate == null ? "—" : Number(r.target_rate).toFixed(3)}</div>
+              <div className="num px-3 py-1.5 text-[11px] text-ink">{r.target_rate === "" || r.target_rate == null ? "-" : Number(r.target_rate).toFixed(3)}</div>
               <div className="px-3 py-1.5"><Chip label={r.leakage_check_status === "pass" ? "pass" : "fail"} /></div>
               <div className="px-3 py-1.5"><Chip label={r.schema_check_status === "pass" ? "pass" : "fail"} /></div>
             </div>
