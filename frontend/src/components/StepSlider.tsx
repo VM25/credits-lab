@@ -12,8 +12,8 @@ export function StepSlider({ label, options, index, onChange, format }: {
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <span className="reg text-[10px] text-ink-soft">{label}</span>
-        <span className="num text-[13px] font-medium text-ink">{format(options[index])}</span>
+        <span className="text-[12.5px] text-ink-soft">{label}</span>
+        <span className="num text-[14px] font-medium text-ink">{format(options[index])}</span>
       </div>
       <Slider.Root
         className="relative mt-2 flex h-4 w-full touch-none items-center"

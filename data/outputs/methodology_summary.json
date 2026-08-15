@@ -5,9 +5,9 @@
     "note": "Per the output contract, chart-ready structure lives inside the required JSON files; no extra output files are created."
   },
   "data_sources": {
-    "card_payments": "Kaggle credit-card fraud (mlg-ulb/creditcardfraud) - genuine labels/amount/Time/V1..V28; deterministically downsampled (all fraud kept).",
+    "card_payments": "Kaggle credit-card fraud (mlg-ulb/creditcardfraud) - observed labels/amount/Time/V1..V28; deterministically downsampled (all fraud kept).",
     "credit": "LendingClub accepted loans (public, Kaggle wordsforthewise/lending-club), seeded stratified sample.",
-    "credit_rejects": "LendingClub rejected applicants (genuine) + clearly-labeled synthetic rejects for reject-inference/policy context only (never used for supervised PD training).",
+    "credit_rejects": "LendingClub rejected applicants (observed records) + clearly-labeled synthetic rejects for reject-inference/policy context only (never used for supervised PD training).",
     "macro": "FRED public series (UNRATE, FEDFUNDS, CPIAUCSL->YoY inflation, DRCCLACBS, CORCCACBS); pulled 2026-06-22. Used for stress overlays only.",
     "stablecoin": "Fully synthetic, seeded transaction sample (secondary module)."
   },
@@ -77,8 +77,8 @@
       "synthetic rejected applicants"
     ],
     "statement": "Synthetic data and engineered features are clearly labeled and never presented as observed history.",
-    "synthetic_features_on_genuine_records": [
-      "card payments: merchant_category/merchant_risk_band/location_proxy/device_proxy/account_id/account_age_days and 24h velocity are synthetic context attached to genuine fraud labels + amount + PCA features"
+    "synthetic_features_on_observed_records": [
+      "card payments: merchant_category/merchant_risk_band/location_proxy/device_proxy/account_id/account_age_days and 24h velocity are synthetic context attached to observed fraud labels + amount + PCA features"
     ]
   },
   "validation_methods": "ROC-AUC, PR-AUC (fraud headline), Brier, KS, calibration curve, decile default table, PSI/drift, segment performance, champion-vs-challenger, Pass/Monitor/Fail verdicts. Accuracy is not used as a headline metric for imbalanced fraud."

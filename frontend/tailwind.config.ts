@@ -10,9 +10,13 @@ export default {
         bg: "#D8E0D7",
         panel: "#C7D2C6",
         "panel-2": "#BCC9BB",
+        // Deeper sage steps used to build surface hierarchy without extra borders.
+        "panel-3": "#B0BEB0",
+        "panel-4": "#A4B4A5",
         line: "#9CAF9D",
         ink: "#18241E",
         "ink-soft": "#45554C",
+        "ink-faint": "#68786E",
         accent: "#285C5E",
         pass: "#35684F",
         review: "#6C6440",

@@ -1,22 +1,21 @@
-// Project links + plain-English glossary + architecture facts.
+// Project links + risk-term reference + architecture facts.
 // (Links and descriptive counts are static project facts, not risk metrics -
 // every risk NUMBER still loads from data/outputs.)
 
 export const GITHUB_URL = "https://github.com/VM25/credits-lab";
-export const SITE_URL = "https://credits-engine.netlify.app";
 
-// Jargon defined once; surfaced on hover for inline terms.
+// Defined once; surfaced on hover for inline terms and in the reference drawer.
 export const GLOSSARY: Record<string, string> = {
-  PD: "The model's estimated chance that a borrower fails to repay.",
-  LGD: "The share of a loan assumed lost if the borrower defaults. An assumption here, not a recovery model.",
-  EAD: "The dollar amount estimated to be at risk when a default happens.",
-  "ROC-AUC": "How well the model ranks riskier cases above safer ones. 0.5 is random; 1.0 is perfect separation.",
-  "PR-AUC": "The right score for rare fraud: it rewards catching fraud without over-flagging good payments. Accuracy looks great here and means nothing.",
-  Brier: "How close predicted probabilities land to what actually happened. Lower is better.",
-  KS: "How far apart the good and bad score distributions sit at their widest point.",
-  PSI: "How much recent data has drifted from the training data. Under 0.10 is stable; past 0.25 is a meaningful shift.",
-  calibration: "Whether the probabilities mean what they say. A 20% group should default about one time in five.",
-  "champion / challenger": "The champion (a transparent logistic scorecard) makes the decisions; the challenger (gradient boosting) is a tougher benchmark kept to keep it honest. The simpler model wins unless the challenger is clearly better and still well-calibrated.",
+  PD: "Probability of default: the modeled chance that a borrower fails to repay.",
+  LGD: "Loss given default: the share of exposure assumed lost when a default occurs. An imposed assumption here, not a recovery model.",
+  EAD: "Exposure at default: the balance assumed to be outstanding when a default occurs.",
+  "ROC-AUC": "The probability that a randomly chosen defaulting account scores above a randomly chosen non-defaulting one. 0.5 is no better than chance.",
+  "PR-AUC": "Summarizes precision against recall on the rare class. It is the appropriate headline for fraud because it ignores the large mass of correctly approved legitimate payments, which accuracy is dominated by.",
+  Brier: "Mean squared error between predicted probabilities and outcomes. Lower is better, and it penalizes overconfidence.",
+  KS: "The largest gap between the cumulative score distributions of defaulting and non-defaulting accounts.",
+  PSI: "Population stability index: how far the scored population has drifted from the training population. Below 0.10 is conventionally treated as stable, above 0.25 as a material shift.",
+  calibration: "Whether stated probabilities match observed frequencies. In a well-calibrated model, accounts predicted at 20% default close to one time in five.",
+  "champion / challenger": "The champion (a transparent logistic scorecard) makes the decisions; the challenger (gradient boosting) is held alongside as a benchmark. The champion keeps the role unless the challenger is clearly better and equally well calibrated.",
 };
 
 // Architecture / code-evidence facts (verified counts from the repo).

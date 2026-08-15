@@ -173,7 +173,7 @@ def build() -> dict:
     2. Supervised model (LogReg, balanced) → fraud_probability [0,1].
     3. Anomaly model (IsolationForest) → anomaly_score [0,1].
     4. Rule score per row.
-    5. Composite fraud_score = 0.60*prob + 0.25*anomaly + 0.15*rule (clipped [0,1]).
+    5. Composite fraud_score = 0.80*prob + 0.10*anomaly + 0.10*rule (clipped [0,1]).
     6. payment_action via action(fraud_score).
     7. expected_fraud_loss per row.
     8. Manual-review queue (capacity-aware).

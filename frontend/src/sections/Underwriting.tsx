@@ -1,17 +1,22 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import type { Bundle } from "../lib/load";
-import { Section, Panel, PanelHead, Chip } from "../components/ui";
+import {
+  Section, Block, Stat, Scope, Label, Chip, StateWord, Tabs, TabPanel, RowButton, TableHead, KV,
+} from "../components/ui";
 import { BarFlat } from "../components/charts";
-import { pct, money, num, TOK, stateColor } from "../lib/format";
+import { pct, money, moneyFull, num, TOK, stateColor } from "../lib/format";
 
 const toArr = (o: Record<string, number>) => Object.entries(o || {}).map(([name, value]) => ({ name, value }));
+const readable = (s: string) => (s || "").replace(/_/g, " ");
+
+const COLS = "1fr 0.6fr 0.5fr 0.8fr";
 
 export function Underwriting({ b }: { b: Bundle }) {
   const p = b.underwritingPolicy;
   const rows: any[] = b.underwritingDecisions.rows ?? [];
-  const [sel, setSel] = useState<number | null>(null);
   const view = rows.slice(0, 40);
+  const [sel, setSel] = useState(0);
+  const r = view[sel];
 
   const pdHist = (p.champion_vs_challenger?.champion?.pd_distribution ?? []).map((d: any) => ({
     bin: d.bin_left?.toFixed ? d.bin_left.toFixed(2) : d.bin_left, count: d.count,
@@ -20,81 +25,129 @@ export function Underwriting({ b }: { b: Bundle }) {
   const mix = toArr(p.approval_mix);
   const elGrade = toArr(p.expected_loss_by_risk_grade).sort((a, b) => a.name.localeCompare(b.name));
   const reasons = toArr(p.top_decline_reasons).sort((a, b) => b.value - a.value).slice(0, 7);
+  const topGrade = elGrade.length ? elGrade.reduce((m, x) => (x.value > m.value ? x : m), elGrade[0]) : null;
 
   return (
-    <Section id="underwriting" label="Underwriting decision engine" title="Applicant data → credit decision"
-      note={`A calibrated logistic scorecard turns each applicant's default risk (PD) into a grade, an approve / review / decline, a credit limit, and reason codes. That is decisioning, not just prediction. The champion carries a Monitor verdict (ROC-AUC ~0.69), disclosed rather than buried behind a headline number. Showing ${view.length} of ${num(b.underwritingDecisions.row_count_total, 0)} accepted applicants (a labeled display sample); the aggregates below cover the full book.`}>
-
-      <div className="grid gap-2 lg:grid-cols-2">
-        <Panel>
-          <PanelHead left="PD distribution (calibrated)" />
-          <div className="px-3 py-3"><BarFlat data={pdHist} x="bin" y="count" /></div>
-        </Panel>
-        <Panel>
-          <PanelHead left="Expected loss by risk grade" />
-          <div className="px-3 py-3"><BarFlat data={elGrade} x="name" y="value" money /></div>
-        </Panel>
-      </div>
-
-      <div className="mt-2 grid gap-2 lg:grid-cols-3">
-        <Panel>
-          <PanelHead left="Risk grade mix" />
-          <div className="px-3 py-3"><BarFlat data={grades} x="name" y="value" height={180} /></div>
-        </Panel>
-        <Panel>
-          <PanelHead left="Approve / review / decline" />
-          <div className="px-3 py-3"><BarFlat data={mix} x="name" y="value" height={180} colorFor={(r) => stateColor(r.name)} /></div>
-        </Panel>
-        <Panel>
-          <PanelHead left="Top decline reasons" />
-          <div className="px-3 py-3"><BarFlat data={reasons} x="name" y="value" height={180} colorFor={() => TOK.fail} /></div>
-        </Panel>
-      </div>
-
-      <Panel className="mt-2">
-        <PanelHead left="Applicant decisions" right="select a row for reason codes" />
-        <div className="grid grid-cols-[1.1fr_0.7fr_0.6fr_0.9fr_0.9fr_0.9fr] reg border-b border-line bg-panel-2 text-[10px] text-ink-soft">
-          {["applicant", "PD", "grade", "decision", "limit", "expected loss"].map((h) => (
-            <div key={h} className="px-3 py-2">{h}</div>
-          ))}
-        </div>
-        <div className="max-h-[420px] overflow-auto">
-          {view.map((r, i) => (
-            <div key={r.applicant_id}>
-              <button
-                onClick={() => setSel(sel === i ? null : i)}
-                className="grid w-full grid-cols-[1.1fr_0.7fr_0.6fr_0.9fr_0.9fr_0.9fr] items-center border-b border-line text-left hover:bg-panel-2"
-                style={sel === i ? { background: "#bcc9bb" } : undefined}
-              >
-                <div className="num px-3 py-2 text-[12px] text-ink">{r.applicant_id}</div>
-                <div className="num px-3 py-2 text-[12px] text-ink">{pct(r.PD)}</div>
-                <div className="num px-3 py-2 text-[12px] text-ink">{r.risk_grade}</div>
-                <div className="px-3 py-2"><Chip label={r.decision} /></div>
-                <div className="num px-3 py-2 text-[12px] text-ink">{money(r.recommended_credit_limit)}</div>
-                <div className="num px-3 py-2 text-[12px] text-ink">{money(r.expected_loss)}</div>
-              </button>
-              <AnimatePresence>
-                {sel === i && (
-                  <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.18 }} className="overflow-hidden border-b border-line bg-bg">
-                    <div className="px-4 py-3">
-                      <div className="reg text-[10px] text-ink-soft">reason codes · model: {r.model_used}</div>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {[r.top_reason_1, r.top_reason_2, r.top_reason_3].filter(Boolean).map((rc: string, k: number) => (
-                          <span key={k} className="num border border-line px-2 py-1 text-[11px] text-ink">{rc.replace(/_/g, " ")}</span>
-                        ))}
-                      </div>
-                      <div className="mt-2 num text-[11px] text-ink-soft">
-                        LGD {num(r.LGD, 2)} · EAD {money(r.EAD)} · EL rate {pct(r.expected_loss_rate)}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+    <Section
+      id="underwriting"
+      tone="panel"
+      title="Who should get credit, and what it costs to be wrong."
+      lede="A calibrated logistic scorecard estimates each applicant's probability of default, then policy turns that number into an action, a limit and an explanation. Pick an applicant to follow one decision end to end."
+    >
+      <Tabs tabs={[{ value: "decision", label: "Decision view" }, { value: "portfolio", label: "Portfolio analysis" }]}>
+        <TabPanel value="decision">
+          <div className="grid gap-6 lg:grid-cols-[380px_1fr] lg:gap-10">
+            {/* master */}
+            <div>
+              <Label right={`${view.length} of ${num(b.underwritingDecisions.row_count_total, 0)}`}>Applicants</Label>
+              <Block tone="flat">
+                <TableHead cols={COLS} headers={["applicant", "PD", "grade", "action"]} />
+                <div className="max-h-[520px] overflow-auto">
+                  {view.map((row, i) => (
+                    <RowButton key={row.applicant_id} selected={i === sel} onClick={() => setSel(i)} cols={COLS}>
+                      <div className="num px-3 py-2 text-[12px] text-ink">{row.applicant_id}</div>
+                      <div className="num px-3 py-2 text-[12px] text-ink">{pct(row.PD)}</div>
+                      <div className="num px-3 py-2 text-[12px] text-ink">{row.risk_grade}</div>
+                      <div className="px-3 py-2"><Chip label={row.decision} size="sm" /></div>
+                    </RowButton>
+                  ))}
+                </div>
+              </Block>
+              <div className="mt-3"><Scope>A labeled display sample of the decision file. Portfolio figures cover the full scored sample.</Scope></div>
             </div>
-          ))}
-        </div>
-      </Panel>
+
+            {/* detail - dominant */}
+            {r && (
+              <Block tone="deep" className="px-7 py-7">
+                <div className="flex flex-wrap items-start justify-between gap-6">
+                  <div>
+                    <div className="text-[11.5px] text-ink-soft">applicant</div>
+                    <div className="num text-[19px] font-medium text-ink">{r.applicant_id}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[11.5px] text-ink-soft">action</div>
+                    <StateWord label={r.decision} size="lg" />
+                  </div>
+                </div>
+
+                <div className="mt-8 grid gap-8 sm:grid-cols-3">
+                  <Stat size="xl" label="probability of default" value={pct(r.PD)} />
+                  <Stat size="lg" label="risk grade" value={r.risk_grade} />
+                  <Stat size="lg" label="expected loss" value={moneyFull(r.expected_loss)} color={stateColor(r.decision)} />
+                </div>
+
+                <div className="mt-9 grid gap-x-12 gap-y-1 sm:grid-cols-2">
+                  <div className="divide-y divide-line/50">
+                    <KV k="recommended credit limit" v={money(r.recommended_credit_limit)} />
+                    <KV k="exposure at default (EAD)" v={money(r.EAD)} />
+                    <KV k="loss given default (LGD)" v={num(r.LGD, 2)} />
+                  </div>
+                  <div className="divide-y divide-line/50">
+                    <KV k="expected loss rate" v={pct(r.expected_loss_rate)} />
+                    <KV k="scoring model" v={<span className="text-[12px]">{readable(r.model_used)}</span>} />
+                    <KV k="model verdict" v={<StateWord label="Monitor" size="sm" />} mono={false} />
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <div className="text-[11.5px] text-ink-soft">reason codes</div>
+                  <ul className="mt-2 space-y-1">
+                    {[r.top_reason_1, r.top_reason_2, r.top_reason_3].filter(Boolean).map((c: string) => (
+                      <li key={c} className="text-[13px] leading-snug text-ink">{readable(c)}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Block>
+            )}
+          </div>
+        </TabPanel>
+
+        <TabPanel value="portfolio">
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div>
+              <Label right="calibrated champion scorecard">Where the sample's risk sits</Label>
+              <Block tone="flat" className="px-3 py-4">
+                <BarFlat data={pdHist} x="bin" y="count" height={260} />
+              </Block>
+              <p className="mt-3 max-w-[60ch] text-[12.5px] leading-relaxed text-ink-soft">
+                Most applicants score between 10% and 40% default probability, so this sample has no
+                large low-risk tail to approve cheaply. That is why the approval rate is modest.
+              </p>
+            </div>
+            <div>
+              <Label right="assumption-driven">Loss concentrates in the weakest grades</Label>
+              <Block tone="flat" className="px-3 py-4">
+                <BarFlat data={elGrade} x="name" y="value" money height={260} />
+              </Block>
+              <p className="mt-3 max-w-[60ch] text-[12.5px] leading-relaxed text-ink-soft">
+                {topGrade
+                  ? `Grade ${topGrade.name} alone carries ${money(topGrade.value)} of modeled expected loss, the largest single grade contribution.`
+                  : "Modeled expected loss by risk grade."}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-10 lg:grid-cols-3">
+            <div>
+              <Label>Risk grade mix</Label>
+              <Block tone="flat" className="px-3 py-4"><BarFlat data={grades} x="name" y="value" height={200} /></Block>
+            </div>
+            <div>
+              <Label>Decision mix</Label>
+              <Block tone="flat" className="px-3 py-4">
+                <BarFlat data={mix} x="name" y="value" height={200} colorFor={(row) => stateColor(row.name)} />
+              </Block>
+            </div>
+            <div>
+              <Label>Why applicants are declined</Label>
+              <Block tone="flat" className="px-3 py-4">
+                <BarFlat data={reasons} x="name" y="value" height={200} colorFor={() => TOK.fail} />
+              </Block>
+            </div>
+          </div>
+          <div className="mt-5"><Scope>Aggregates cover all {num(b.underwritingDecisions.row_count_total, 0)} scored applicants at the current operating point.</Scope></div>
+        </TabPanel>
+      </Tabs>
     </Section>
   );
 }
