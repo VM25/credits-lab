@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { loadAll, type Bundle } from "./lib/load";
-import { GITHUB_URL, SITE_URL } from "./lib/site";
 import { GithubLink } from "./components/guide";
 import { Hero } from "./sections/Hero";
 import { Workflow } from "./sections/Workflow";
@@ -31,16 +30,6 @@ const NAV = [
   ["architecture", "Architecture"],
 ] as const;
 
-const DEMONSTRATES = [
-  "credit underwriting decisioning",
-  "fraud & payments-risk scoring",
-  "expected-loss modeling",
-  "model validation & calibration",
-  "policy-threshold simulation",
-  "full Python-to-React deployment",
-  "public/synthetic data disclosure",
-  "testing & reconciliation discipline",
-];
 
 export function App() {
   const [bundle, setBundle] = useState<Bundle | null>(null);
@@ -71,7 +60,6 @@ export function App() {
           {NAV.map(([id, label]) => (
             <a key={id} href={`#${id}`} className="reg text-[10.5px] text-ink-soft hover:text-accent">{label}</a>
           ))}
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="reg ml-auto text-[10.5px] text-accent hover:underline">GitHub ↗</a>
         </nav>
 
         <Hero b={bundle} />
@@ -88,16 +76,11 @@ export function App() {
         <Architecture />
 
         <footer className="mt-4 border-t border-line py-8">
-          <div className="reg text-[11px] text-accent">What this project demonstrates</div>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {DEMONSTRATES.map((d) => <span key={d} className="border border-line px-2 py-1 text-[11px] text-ink">{d}</span>)}
-          </div>
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <GithubLink />
-            <a href={SITE_URL} className="reg text-[10.5px] text-accent hover:underline">{SITE_URL.replace("https://", "")}</a>
-          </div>
-          <p className="mt-3 max-w-[90ch] text-[11.5px] text-ink-soft">
-            Credit &amp; Payments Risk Decision Engine - a portfolio research project using public (LendingClub, Kaggle, FRED) and clearly-labeled synthetic data. Modeled estimates, not realized losses. Not a production lending, fraud, or regulatory-compliance system.
+          <p className="max-w-[70ch] text-[13px] leading-relaxed text-ink">
+            An end-to-end study of how borrower and transaction data become governed decisions: underwriting, fraud routing, expected loss, a policy simulator, and the validation evidence behind them, built as a Python engine and deployed behind this React terminal.
+          </p>
+          <p className="mt-4 max-w-[80ch] text-[11.5px] leading-relaxed text-ink-soft">
+            Portfolio research project on public LendingClub, Kaggle ULB, and FRED data plus clearly-labeled synthetic stablecoin and payment-context features. Modeled estimates, not realized losses. Not a production lending, fraud, or regulatory-compliance system.
           </p>
         </footer>
       </div>
@@ -110,16 +93,15 @@ function Header() {
     <header className="py-7">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="reg text-[11px] text-accent">Underwriting Strategy · Fraud Monitoring · Expected Loss · Model Risk</div>
-          <h1 className="mt-2 text-[30px] font-bold leading-tight tracking-tight text-ink">Credit &amp; Payments Risk Decision Engine</h1>
-          <p className="mt-2 max-w-[80ch] text-[14px] text-ink-soft">
-            Borrower and transaction data translated into underwriting decisions, fraud controls, expected-loss estimates, and model-risk validation evidence.
+          <h1 className="text-[31px] font-bold leading-tight tracking-tight text-ink">Credit &amp; Payments Risk Decision Engine</h1>
+          <p className="mt-2 max-w-[78ch] text-[14.5px] leading-snug text-ink-soft">
+            Borrower and transaction data, turned into underwriting decisions, fraud controls, expected-loss estimates, and the evidence to trust the models behind them.
           </p>
         </div>
         <div className="shrink-0 pt-1"><GithubLink compact /></div>
       </div>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {["Underwriting Strategy", "Fraud & Payments", "Expected Loss", "Model Risk & Validation"].map((m) => (
+      <div className="mt-4 flex flex-wrap gap-2">
+        {["Underwriting", "Fraud & payments", "Expected loss", "Model risk"].map((m) => (
           <span key={m} className="reg border border-line px-2 py-1 text-[10px] text-ink">{m}</span>
         ))}
       </div>

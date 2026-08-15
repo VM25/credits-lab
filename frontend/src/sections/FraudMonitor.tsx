@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, MetricRow, Chip } from "../components/ui";
-import { IntroBlock, Callout } from "../components/guide";
 import { BarFlat, LineFlat } from "../components/charts";
 import { pct, money, num, TOK, stateColor } from "../lib/format";
 
@@ -20,16 +19,8 @@ export function FraudMonitor({ b }: { b: Bundle }) {
 
   return (
     <Section id="fraud" label="Fraud & payments monitor" title="Transaction risk → payment action"
-      note="Real Kaggle fraud labels (heavily imbalanced). PR-AUC is the headline metric; accuracy is not used. Manual review is capacity-bounded.">
-      <IntroBlock
-        what="Scores every transaction for fraud (rules + a supervised model + an anomaly detector) and routes it to approve, step-up, review, or block."
-        why="Fraud is ~0.6% of transactions, so accuracy is misleading (approving everything scores 99%+). PR-AUC is the honest headline - it rewards catching fraud without drowning good payments in false positives."
-        look="Select a transaction for its drivers. The manual-review queue is capacity-bounded, so not every high score is queued."
-      />
-      <Callout label="metric choice">
-        The headline is <b>PR-AUC</b>, not accuracy. On a heavily imbalanced problem, a high accuracy number means nothing; precision and recall on the rare fraud class are what matter.
-      </Callout>
-      <div className="mt-3" />
+      note="Public Kaggle fraud labels, heavily imbalanced at roughly 0.6% fraud. Rules, a supervised model, and an anomaly detector score every transaction and route it to approve, step-up, review, or block. PR-AUC is the honest headline: on data this skewed, accuracy looks near-perfect and means nothing. The manual-review queue is capacity-bounded, so not every high score is queued.">
+      <div className="mt-1" />
       <MetricRow items={[
         { label: "PR-AUC (headline)", value: num(f.pr_auc, 3) },
         { label: "precision", value: num(f.precision, 3) },

@@ -19,15 +19,15 @@ def build() -> dict:
     methodology = {
         "data_sources": {
             "credit": "LendingClub accepted loans (public, Kaggle wordsforthewise/lending-club), seeded stratified sample.",
-            "credit_rejects": "LendingClub rejected applicants (real) + clearly-labeled synthetic rejects for reject-inference/policy context only (never used for supervised PD training).",
-            "card_payments": "Kaggle credit-card fraud (mlg-ulb/creditcardfraud) — real labels/amount/Time/V1..V28; deterministically downsampled (all fraud kept).",
+            "credit_rejects": "LendingClub rejected applicants (genuine) + clearly-labeled synthetic rejects for reject-inference/policy context only (never used for supervised PD training).",
+            "card_payments": "Kaggle credit-card fraud (mlg-ulb/creditcardfraud) - genuine labels/amount/Time/V1..V28; deterministically downsampled (all fraud kept).",
             "stablecoin": "Fully synthetic, seeded transaction sample (secondary module).",
             "macro": f"FRED public series (UNRATE, FEDFUNDS, CPIAUCSL->YoY inflation, DRCCLACBS, CORCCACBS); pulled {fred_pull}. Used for stress overlays only.",
         },
         "synthetic_data_disclosure": {
             "fully_synthetic": ["stablecoin transactions", "synthetic rejected applicants"],
-            "synthetic_features_on_real_records": [
-                "card payments: merchant_category/merchant_risk_band/location_proxy/device_proxy/account_id/account_age_days and 24h velocity are synthetic context attached to REAL fraud labels + amount + PCA features"],
+            "synthetic_features_on_genuine_records": [
+                "card payments: merchant_category/merchant_risk_band/location_proxy/device_proxy/account_id/account_age_days and 24h velocity are synthetic context attached to genuine fraud labels + amount + PCA features"],
             "statement": "Synthetic data and engineered features are clearly labeled and never presented as observed history.",
         },
         "default_flag_definition": "Default / SEVERE-DELINQUENCY PROXY (not pure charge-off): 1 = Charged Off / Default / Late (31-120 days) / 'Does not meet the credit policy. Status:Charged Off'; 0 = Fully Paid; in-progress/ambiguous statuses dropped.",

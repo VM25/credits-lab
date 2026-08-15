@@ -54,7 +54,7 @@ def build() -> dict:
             "expected_loss_rate": highest["expected_loss_rate"],
             "total_expected_loss": highest["total_expected_loss"],
         },
-        "data_disclaimer": "Hybrid data: real LendingClub/Kaggle/FRED inputs plus clearly-labeled synthetic stablecoin and synthetic payment-context features. Estimates are modeled, not realized; default_flag is a default/severe-delinquency proxy.",
+        "data_disclaimer": "Hybrid data: public LendingClub/Kaggle/FRED inputs plus clearly-labeled synthetic stablecoin and synthetic payment-context features. Estimates are modeled, not realized; default_flag is a default/severe-delinquency proxy.",
     }
     write_json(config.OUTPUTS / "risk_command_center.json", summary)
     return summary

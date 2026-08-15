@@ -1,6 +1,5 @@
 import type { Bundle } from "../lib/load";
 import { Section, MetricRow, Panel, PanelHead, Chip } from "../components/ui";
-import { IntroBlock, Term } from "../components/guide";
 import { pct, money, num } from "../lib/format";
 
 export function CommandCenter({ b }: { b: Bundle }) {
@@ -9,12 +8,7 @@ export function CommandCenter({ b }: { b: Bundle }) {
   const hrs = c.highest_risk_segment ?? {};
   return (
     <Section id="command-center" label="Risk command center" title="Portfolio-level risk state"
-      note="Every figure traces to data/outputs. Modeled estimates, not realized losses.">
-      <IntroBlock
-        what="The portfolio snapshot: decision mix, loss exposure, review burden, and model status in one place."
-        why="It shows the state of the whole book before you drill into any single applicant or transaction."
-        look="Approval mix vs. loss exposure, and the model verdict panel (the credit model is on Monitor, not Pass)."
-      />
+      note="The whole book on one screen: decision mix, modeled loss exposure, review load, and model status, read before you drill into any single applicant or transaction. Every figure traces to data/outputs, and the credit model sits on Monitor, not Pass.">
       <div className="reg mb-1 text-[10px] text-ink-soft">credit decision mix</div>
       <MetricRow items={[
         { label: "approval rate", value: pct(c.approval_rate) },

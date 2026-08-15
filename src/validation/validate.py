@@ -341,7 +341,7 @@ def _validate_fraud():
         "sanity_roc_auc_vs_fraud_label": round(anom_auc, 6),
         "score_distribution_test": anom_score_dist,
         "score_distribution_alerts": alert_anom_dist,
-        "note": "Unsupervised model — sanity AUC measures discrimination vs fraud label; not used as primary fraud classifier.",
+        "note": "Unsupervised model - sanity AUC measures discrimination vs fraud label; not used as primary fraud classifier.",
     }
 
     return {
@@ -459,7 +459,7 @@ def _validate_stablecoin():
         "threshold_sensitivity": sensitivity,
         "top_risk_driver_frequency": top_risk_drivers,
         "discrimination_auc_vs_synthetic_label": round(disc_auc, 6),
-        "note": "AML-style risk indicators — discrimination AUC measures separation against synthetic risk label; score not trained on this label.",
+        "note": "AML-style risk indicators - discrimination AUC measures separation against synthetic risk label; score not trained on this label.",
     }
 
 
@@ -822,7 +822,7 @@ def build() -> dict:
     # Embed calibration_curve and decile_default_table here (NOT as separate files)
     summary = {
         "description": (
-            "Model-risk validation summary — Phase 7. "
+            "Model-risk validation summary - Phase 7. "
             "Calibration curve and decile default table are embedded here (chart-embedding map). "
             "No separate calibration_curve.json or decile_default_table.csv are written."
         ),

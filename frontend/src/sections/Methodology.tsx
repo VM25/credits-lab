@@ -1,6 +1,5 @@
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, Chip } from "../components/ui";
-import { IntroBlock } from "../components/guide";
 
 function KV({ obj }: { obj: Record<string, any> }) {
   return (
@@ -21,12 +20,7 @@ export function Methodology({ b }: { b: Bundle }) {
 
   return (
     <Section id="methodology" label="Evidence & methodology" title="Data, assumptions, validation, limitations"
-      note="Full disclosure. Real data labeled real; synthetic data and engineered features labeled synthetic.">
-      <IntroBlock
-        what="The receipts: data sources, the default-flag definition, models, assumptions, validation methods, known limitations, and the data-quality/leakage gates."
-        why="Credibility comes from disclosure. What is real (LendingClub, Kaggle, FRED), what is synthetic (stablecoin + card context), and what is assumed (LGD/EAD/stress) is stated plainly."
-        look="The known-limitations panel and the data-quality report - including the leakage and schema gates that must pass before any output is written."
-      />
+      note="The receipts: data sources, the default-flag definition, models, assumptions, validation methods, known limitations, and the leakage and schema gates that must pass before any output is written. Public data (LendingClub, Kaggle, FRED) and synthetic data (stablecoin and card context) are each labeled as what they are; assumptions (LGD, EAD, stress) are stated plainly.">
       <div className="grid gap-2 lg:grid-cols-2">
         <Panel><PanelHead left="Data sources" /><KV obj={m.data_sources} /></Panel>
         <Panel><PanelHead left="Synthetic data disclosure" /><KV obj={m.synthetic_data_disclosure} /></Panel>

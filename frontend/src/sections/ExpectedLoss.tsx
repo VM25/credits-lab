@@ -1,6 +1,6 @@
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, MetricRow } from "../components/ui";
-import { IntroBlock, Term, Callout } from "../components/guide";
+import { Term, Callout } from "../components/guide";
 import { BarFlat } from "../components/charts";
 import { money, pct, num, TOK, stateColor } from "../lib/format";
 
@@ -17,12 +17,7 @@ export function ExpectedLoss({ b }: { b: Bundle }) {
 
   return (
     <Section id="expected-loss" label="Expected loss engine" title="Risk scores → financial loss estimates"
-      note="Assumption-driven estimates (LGD/EAD/severity labeled), not realized losses.">
-      <IntroBlock
-        what="Converts risk scores into money at risk: Expected Loss = PD × LGD × EAD, aggregated by grade and decision, then re-run under stress."
-        why="It bridges model output and business decisions - the same PD means very different exposure depending on loan size and loss severity."
-        look="Rates and rankings over raw dollars. All dollar figures are assumption-driven (LGD/EAD are assumptions), not observed losses."
-      />
+      note="Risk scores become money at risk: Expected Loss = PD × LGD × EAD, aggregated by grade and decision, then re-run under stress. The same PD implies very different exposure once loan size and loss severity are folded in, so read rates and rankings over raw dollars. Every figure is assumption-driven (LGD, EAD, and severity are labeled assumptions), not realized loss.">
       <Panel className="mb-3">
         <div className="px-4 py-3 num text-[15px] text-ink">
           Expected Loss = <Term k="PD">PD</Term> × <Term k="LGD">LGD</Term> × <Term k="EAD">EAD</Term>

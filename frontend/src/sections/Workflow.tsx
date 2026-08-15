@@ -20,24 +20,22 @@ const QUESTIONS: [string, string][] = [
 ];
 
 const PROVES = [
-  "Turning raw borrower + transaction data into governed decisions, not just predictions.",
-  "Calibrated probability-of-default and rare-event fraud detection (PR-AUC, not accuracy).",
-  "Expected-loss translation (PD × LGD × EAD) with labeled assumptions and stress testing.",
-  "Model-risk governance: honest Pass / Monitor / Fail verdicts, including a Monitor on the credit model.",
-  "A full Python engine deployed behind a React decision terminal that reads only reconciled outputs.",
+  "Raw borrower and transaction data becoming governed decisions, not just predictions.",
+  "Calibrated probability-of-default and rare-event fraud detection scored the right way (PR-AUC, not accuracy).",
+  "Expected loss (PD × LGD × EAD) built from labeled assumptions and put under stress.",
+  "Honest model-risk governance, including a Monitor verdict left standing on the credit model.",
 ];
 
 const NOT = [
-  "a production lending, fraud, or regulatory-compliance system",
-  "a bank report or PDF turned into a web page",
+  "a production lending, fraud, or compliance system",
+  "a bank report or PDF dressed up as a web page",
   "a generic ML dashboard or a crypto / trading product",
-  "a source of real lending decisions or real customer data",
 ];
 
 export function Workflow() {
   return (
     <Section id="workflow" label="How the decision engine works" title="From data to a governed decision"
-      note="Read this first. Every module below is one stage of a single pipeline - not a collection of unrelated charts.">
+      note="Every module below is one stage of a single pipeline, not a set of unrelated charts. The credit book, the payment stream, and the policy grid all flow through the same path.">
 
       <Panel>
         <PanelHead left="The pipeline" />
@@ -65,42 +63,31 @@ export function Workflow() {
         </div>
       </Panel>
 
-      <div className="mt-2 grid gap-2 lg:grid-cols-2">
+      <div className="mt-2 grid gap-2 lg:grid-cols-[1.4fr_1fr]">
         <Panel>
-          <PanelHead left="How to read this" />
-          <ul className="list-none px-4 py-3 text-[12.5px] leading-relaxed text-ink">
-            <li>Start at the Risk Command Center for the portfolio snapshot, then follow the sections top to bottom.</li>
-            <li>Hover any underlined term (PD, PR-AUC, PSI, …) for a plain-English definition.</li>
-            <li>Select a row in the applicant or transaction tables to see input → score → decision → reason → loss.</li>
-            <li>Move the Policy Simulator controls to see growth, loss, and review burden trade off in real backend scenarios.</li>
+          <PanelHead left="What this proves" />
+          <ul className="list-none divide-y divide-line text-[12.5px]">
+            {PROVES.map((p) => <li key={p} className="px-4 py-2 text-ink">{p}</li>)}
           </ul>
         </Panel>
-        <div className="grid gap-2">
-          <Panel>
-            <PanelHead left="What this proves" />
-            <ul className="list-none divide-y divide-line text-[12px]">
-              {PROVES.map((p) => <li key={p} className="px-4 py-1.5 text-ink">{p}</li>)}
-            </ul>
-          </Panel>
-          <Panel>
-            <PanelHead left="What this is not" />
-            <div className="px-4 py-2 text-[12px] text-ink-soft">
-              Not {NOT.map((n, i) => <span key={n}>{i > 0 ? ", " : ""}{n}</span>)}.
-            </div>
-          </Panel>
-        </div>
+        <Panel>
+          <PanelHead left="What this is not" />
+          <div className="px-4 py-2.5 text-[12.5px] leading-relaxed text-ink-soft">
+            It is not {NOT.map((n, i) => <span key={n}>{i === NOT.length - 1 ? ", or " : i > 0 ? ", " : ""}{n}</span>)}, and it makes no lending decisions and touches no real customer data.
+          </div>
+        </Panel>
       </div>
 
       <Panel className="mt-2">
-        <PanelHead left="Glossary" right="hover these terms anywhere on the page" />
-        <div className="grid gap-x-6 gap-y-1 px-4 py-3 md:grid-cols-2">
+        <PanelHead left="Key risk terms" />
+        <dl className="grid gap-x-8 gap-y-3 px-4 py-4 md:grid-cols-2">
           {Object.entries(GLOSSARY).map(([k, v]) => (
-            <div key={k} className="grid grid-cols-[130px_1fr] gap-2 border-b border-line py-1.5">
-              <span className="reg text-[10px] text-accent">{k}</span>
-              <span className="text-[11.5px] leading-snug text-ink-soft">{v}</span>
+            <div key={k}>
+              <dt className="reg text-[10px] text-accent">{k}</dt>
+              <dd className="mt-0.5 text-[12px] leading-snug text-ink-soft">{v}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </Panel>
     </Section>
   );

@@ -32,23 +32,6 @@ export function Term({ k, children }: { k: string; children?: ReactNode }) {
   );
 }
 
-// Guided intro shown under a section title: what it does / why / what to look at.
-export function IntroBlock({ what, why, look }: { what: string; why: string; look: string }) {
-  const rows: [string, string][] = [["what", what], ["why it matters", why], ["what to look at", look]];
-  return (
-    <div className="mb-4 border-l-2 border-accent bg-panel-2 px-4 py-3">
-      <dl className="grid gap-1.5">
-        {rows.map(([k, v]) => (
-          <div key={k} className="grid grid-cols-[110px_1fr] gap-3">
-            <dt className="reg text-[10px] text-ink-soft">{k}</dt>
-            <dd className="text-[12.5px] leading-snug text-ink">{v}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
-}
-
 // Caveat / disclosure callout (uses the muted "review" tone, never alarming red).
 export function Callout({ label = "note", children }: { label?: string; children: ReactNode }) {
   return (

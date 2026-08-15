@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, MetricRow } from "../components/ui";
-import { IntroBlock } from "../components/guide";
 import { StepSlider } from "../components/StepSlider";
 import { pct, money, num } from "../lib/format";
 
@@ -30,12 +29,7 @@ export function PolicySimulator({ b }: { b: Bundle }) {
 
   return (
     <Section id="policy-simulator" label="Policy simulator" title="Threshold changes → growth vs loss tradeoff"
-      note={`Controls snap to a precomputed scenario grid (${scenarios.length} scenarios). The interface looks up real backend results; it does not recompute risk client-side.`}>
-      <IntroBlock
-        what="Shows what happens when risk thresholds change: move the credit, fraud, stablecoin, and stress controls and watch growth trade off against loss and review burden."
-        why="A model is only useful once it becomes a controlled policy. This is the growth-vs-loss lever that risk teams actually argue over."
-        look="Every combination is a real precomputed backend scenario - the UI looks one up, it never fakes the math. Watch the model-risk warnings update."
-      />
+      note={`A model only matters once it becomes a policy. Move the credit, fraud, stablecoin, and stress controls and watch growth trade against loss and review burden, the lever risk teams actually argue over. Every combination is a precomputed backend scenario (${scenarios.length} in all); the interface looks one up and never recomputes risk client-side.`}>
       <div className="mb-3 num text-[11px] text-ink-soft">
         {scenarios.length} scenarios = 5 credit PD cutoffs × 4 fraud thresholds × 3 stablecoin thresholds × 3 stress scenarios.
       </div>

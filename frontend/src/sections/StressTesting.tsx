@@ -1,6 +1,5 @@
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead } from "../components/ui";
-import { IntroBlock } from "../components/guide";
 import { BarFlat } from "../components/charts";
 import { money, num, TOK } from "../lib/format";
 
@@ -11,12 +10,7 @@ export function StressTesting({ b }: { b: Bundle }) {
 
   return (
     <Section id="stress" label="Stress testing" title="Loss sensitivity under worse conditions"
-      note="Simulated stress via PD/LGD/fraud multipliers (PD capped at 1.0). Macro variables inform overlays only; no individual-default causality is claimed.">
-      <IntroBlock
-        what="Re-runs expected loss under Base, Moderate, and Severe conditions by scaling PD, LGD, and fraud-loss multipliers (PD capped at 1.0)."
-        why="Portfolios must survive downturns, not just today's conditions. Stress shows how fast loss grows when the environment worsens."
-        look="How steeply total expected loss rises from Base to Severe, and which loss type (credit vs. fraud) drives the increase."
-      />
+      note="Expected loss re-run under Base, Moderate, and Severe conditions by scaling PD, LGD, and fraud-loss multipliers (PD capped at 1.0). The question is how steeply loss climbs as the environment worsens, and which loss type drives it. Macro variables inform overlays only; no individual-default causality is claimed.">
       <div className="grid gap-2 lg:grid-cols-[1fr_1.3fr]">
         <Panel>
           <PanelHead left="Total expected loss by scenario" />

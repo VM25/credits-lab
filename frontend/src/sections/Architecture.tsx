@@ -1,5 +1,5 @@
 import { Section, Panel, PanelHead } from "../components/ui";
-import { ARCH, GITHUB_URL } from "../lib/site";
+import { ARCH } from "../lib/site";
 
 export function Architecture() {
   return (
@@ -45,8 +45,7 @@ export function Architecture() {
       </div>
 
       <div className="mt-2 text-[12px] text-ink-soft">
-        Reproduce end to end: <span className="num">python -m src.run_pipeline</span> regenerates all outputs (14 fail-fast phases, deterministic), <span className="num">python -m pytest</span> runs the tests, and the frontend reads the synced outputs.{" "}
-        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-accent underline decoration-dotted underline-offset-2">Browse the source on GitHub.</a>
+        Reproduce end to end: <span className="num">python -m src.run_pipeline</span> regenerates all outputs (14 fail-fast phases, deterministic), <span className="num">python -m pytest</span> runs the tests, and the frontend reads the synced outputs.
       </div>
     </Section>
   );

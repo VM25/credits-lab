@@ -2,7 +2,6 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Bundle } from "../lib/load";
 import { Section, Panel, PanelHead, Chip } from "../components/ui";
-import { IntroBlock, Callout } from "../components/guide";
 import { BarFlat } from "../components/charts";
 import { pct, money, num, TOK, stateColor } from "../lib/format";
 
@@ -24,17 +23,9 @@ export function Underwriting({ b }: { b: Bundle }) {
 
   return (
     <Section id="underwriting" label="Underwriting decision engine" title="Applicant data → credit decision"
-      note={`Champion logistic scorecard (calibrated PD). Showing ${view.length} of ${num(b.underwritingDecisions.row_count_total, 0)} accepted applicants (a labeled display sample); aggregates below are over the full book.`}>
+      note={`A calibrated logistic scorecard turns each applicant's default risk (PD) into a grade, an approve / review / decline, a credit limit, and reason codes. That is decisioning, not just prediction. The champion carries a Monitor verdict (ROC-AUC ~0.69), disclosed rather than buried behind a headline number. Showing ${view.length} of ${num(b.underwritingDecisions.row_count_total, 0)} accepted applicants (a labeled display sample); the aggregates below cover the full book.`}>
 
-      <IntroBlock
-        what="Estimates each applicant's default risk (PD), assigns a risk grade, and converts it into approve / review / decline plus a credit limit and reason codes."
-        why="This is credit decisioning, not just prediction: a calibrated probability becomes a governed action with an explanation."
-        look="Select a row to see input → PD → decision → reason codes → expected loss. Higher-PD deciles should default more often (they do)."
-      />
-      <Callout label="model risk">
-        The credit champion carries a <b>Monitor</b> verdict (ROC-AUC ~0.69). That is disclosed on purpose - honest model-risk governance surfaces modest discrimination rather than hiding it behind a headline number.
-      </Callout>
-      <div className="mt-3 grid gap-2 lg:grid-cols-2">
+      <div className="grid gap-2 lg:grid-cols-2">
         <Panel>
           <PanelHead left="PD distribution (calibrated)" />
           <div className="px-3 py-3"><BarFlat data={pdHist} x="bin" y="count" /></div>

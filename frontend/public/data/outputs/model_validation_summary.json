@@ -211,11 +211,11 @@
       "pd_mean": 0.518361
     }
   ],
-  "description": "Model-risk validation summary \u2014 Phase 7. Calibration curve and decile default table are embedded here (chart-embedding map). No separate calibration_curve.json or decile_default_table.csv are written.",
+  "description": "Model-risk validation summary - Phase 7. Calibration curve and decile default table are embedded here (chart-embedding map). No separate calibration_curve.json or decile_default_table.csv are written.",
   "fraud_anomaly_metrics": {
     "model": "fraud_anomaly",
     "model_type": "isolation_forest",
-    "note": "Unsupervised model \u2014 sanity AUC measures discrimination vs fraud label; not used as primary fraud classifier.",
+    "note": "Unsupervised model - sanity AUC measures discrimination vs fraud label; not used as primary fraud classifier.",
     "sanity_roc_auc_vs_fraud_label": 0.926771,
     "score_distribution_alerts": [
       {
@@ -653,7 +653,7 @@
   "stablecoin": {
     "discrimination_auc_vs_synthetic_label": 0.871338,
     "high_risk_wallet_concentration": 0.006329,
-    "note": "AML-style risk indicators \u2014 discrimination AUC measures separation against synthetic risk label; score not trained on this label.",
+    "note": "AML-style risk indicators - discrimination AUC measures separation against synthetic risk label; score not trained on this label.",
     "risk_action_mix": {
       "high_risk": {
         "count": 4,

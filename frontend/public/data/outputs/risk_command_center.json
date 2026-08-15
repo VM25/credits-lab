@@ -1,7 +1,7 @@
 {
   "approval_rate": 0.240846,
   "average_PD": 0.256884,
-  "data_disclaimer": "Hybrid data: real LendingClub/Kaggle/FRED inputs plus clearly-labeled synthetic stablecoin and synthetic payment-context features. Estimates are modeled, not realized; default_flag is a default/severe-delinquency proxy.",
+  "data_disclaimer": "Hybrid data: public LendingClub/Kaggle/FRED inputs plus clearly-labeled synthetic stablecoin and synthetic payment-context features. Estimates are modeled, not realized; default_flag is a default/severe-delinquency proxy.",
   "decline_rate": 0.377934,
   "highest_risk_segment": {
     "dimension": "risk_grade",
