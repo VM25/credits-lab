@@ -20,6 +20,8 @@ export function Overview({ b }: { b: Bundle }) {
   const fraudRoc = b.validationSummary?.fraud_supervised_metrics?.roc_auc;
   const verdicts: Record<string, string> = c.model_verdict_summary?.by_model ?? {};
   const hrs = c.highest_risk_segment ?? {};
+  // The headline loss covers every decision; only the approved slice would be booked.
+  const approvedEL = b.expectedLossSummary?.expected_loss_by_decision?.approve;
 
   return (
     <Section
@@ -77,7 +79,13 @@ export function Overview({ b }: { b: Bundle }) {
           <div>
             <Label>Modeled credit loss</Label>
             <Stat size="lg" label="expected credit loss" value={money(c.total_expected_credit_loss)} />
-            <div className="mt-3"><Scope>On {money(c.total_approved_exposure)} approved exposure, at the current cutoffs. Assumption-driven, not realized.</Scope></div>
+            <div className="mt-3">
+              <Scope>
+                Across every scored applicant, including the ones declined. Only{" "}
+                {money(approvedEL)} of it sits on approved accounts, which is the part the
+                portfolio would actually carry. Assumption-driven, not realized.
+              </Scope>
+            </div>
           </div>
 
           <div>

@@ -123,9 +123,9 @@ export function PolicyLab({ b }: { b: Bundle }) {
                   <Delta label="Approval rate" base={baseline.approval_rate} cur={scen.approval_rate} kind="pct" better="up" />
                   <Delta label="Review rate" base={baseline.review_rate} cur={scen.review_rate} kind="pct" better="down" />
                   <Delta label="Decline rate" base={baseline.decline_rate} cur={scen.decline_rate} kind="pct" better="down" />
-                  <Delta label="Expected credit loss" base={baseline.expected_credit_loss} cur={scen.expected_credit_loss} kind="money" better="down" />
-                  <Delta label="Expected fraud loss" base={baseline.expected_fraud_loss} cur={scen.expected_fraud_loss} kind="money" better="down" />
-                  <Delta label="Stablecoin risk exposure" base={baseline.stablecoin_risk_exposure} cur={scen.stablecoin_risk_exposure} kind="money" better="down" />
+                  <Delta label="Expected credit loss (approved accounts only)" base={baseline.expected_credit_loss} cur={scen.expected_credit_loss} kind="money" better="down" />
+                  <Delta label="Expected fraud loss (let through)" base={baseline.expected_fraud_loss} cur={scen.expected_fraud_loss} kind="money" better="down" />
+                  <Delta label="Stablecoin exposure (high-risk wallets)" base={baseline.stablecoin_risk_exposure} cur={scen.stablecoin_risk_exposure} kind="money" better="down" />
                   <Delta label="Manual review volume" base={baseline.manual_review_volume} cur={scen.manual_review_volume} kind="int" better="down" />
                   <Delta label="Total expected loss" base={baseline.total_expected_loss} cur={scen.total_expected_loss} kind="money" better="down" />
                 </div>
@@ -150,7 +150,11 @@ export function PolicyLab({ b }: { b: Bundle }) {
                 <Scope>
                   Baseline is the validation-supported operating point (approve below{" "}
                   {pct(d.approve, 0)}, decline at or above {pct(b.policyLoss?.operating_point?.decline ?? 0.3, 0)}),
-                  under base conditions. Loss figures are modeled, not realized.
+                  under base conditions. These are policy-conditional quantities and deliberately
+                  narrower than the portfolio totals in Overview and Expected loss: credit loss here
+                  counts approved accounts only, fraud loss counts what the threshold lets through,
+                  and stablecoin counts wallets at or above the high-risk cutoff. All modeled, not
+                  realized.
                 </Scope>
               </div>
             </div>
@@ -185,11 +189,13 @@ export function PolicyLab({ b }: { b: Bundle }) {
           </div>
           <div className="mt-8 max-w-[86ch]">
             <Note>
-              Stress is applied by scaling PD, LGD and fraud-loss multipliers, with PD capped at 1.0.
-              Macro series inform the choice of multipliers only; no causal link between a macro
-              variable and an individual default is claimed. Base-case figures here are recomputed
-              through the multiplier path, so they can differ from the headline portfolio total by a
-              few dollars of rounding.
+              These scenarios are portfolio-wide: they cover every scored applicant and transaction,
+              which is why the base case matches the Overview total rather than the smaller,
+              approved-only figure on the Policy thresholds tab. Stress is applied by scaling PD,
+              LGD and fraud-loss multipliers, with PD capped at 1.0. Macro series inform the choice
+              of multipliers only; no causal link between a macro variable and an individual default
+              is claimed. Base-case figures are recomputed through the multiplier path, so they can
+              differ from the headline total by a few dollars of rounding.
             </Note>
           </div>
         </TabPanel>

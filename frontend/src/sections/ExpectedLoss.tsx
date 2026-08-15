@@ -75,7 +75,7 @@ export function ExpectedLoss({ b }: { b: Bundle }) {
         <TabPanel value="portfolio">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <Stat size="lg" label="expected credit loss" value={money(e.total_expected_credit_loss)}
-              sub={`on ${money(e.total_approved_exposure)} approved exposure`} />
+              sub={`every scored applicant; ${money(e.expected_loss_by_decision?.approve)} of it on approved accounts`} />
             <Stat size="lg" label="expected fraud loss" value={money(e.total_expected_fraud_loss)}
               sub="across all scored transactions, before action" />
             <Stat size="lg" label="stablecoin risk exposure" value={money(e.total_stablecoin_risk_exposure)}
@@ -117,9 +117,10 @@ export function ExpectedLoss({ b }: { b: Bundle }) {
 
           <div className="mt-6">
             <Scope>
-              Credit loss totals here match the portfolio figure shown in the overview. Fraud loss is
-              probability-weighted across the transaction sample and is not the same quantity as the
-              fraud loss avoided by flagging, reported in Fraud &amp; Payments.
+              These totals match the overview because they share its scope: every scored applicant
+              and every scored transaction. The Policy Lab reports narrower quantities on purpose -
+              credit loss on approved accounts only, and the fraud loss a policy lets through - so
+              its figures are smaller by design rather than in conflict with these.
             </Scope>
           </div>
         </TabPanel>
